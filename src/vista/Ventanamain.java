@@ -16,7 +16,7 @@ public class Ventanamain extends JFrame implements ActionListener{
 
     public Ventanamain (){
         iniciarComponentes();
-        im1 = new Decolib("/img/Fondo.png");
+        im1 = new Decolib("/img/Fondo2.png");
         im1.setBounds(0, 0, 1280, 720 );
         add(im1);
     }
@@ -97,17 +97,17 @@ public class Ventanamain extends JFrame implements ActionListener{
         jpLista = new JPanel();
         jpLista.setLayout(null);
         jpLista.setBounds((int)50.03, (int)137.53, (int)518.75 ,(int)464.42);
-        jpLista.setBackground(new Color(252, 248, 232));
+        jpLista.setBackground(new Color(232, 246, 239));
         jpPrincipal.add(jpLista);
 
         jpInformacion = new JPanel();
         jpInformacion.setLayout(null);
         jpInformacion.setBounds((int)605.5, (int)138.5, 541, 248);
-        jpInformacion.setBackground(new Color(252, 248, 232));
+        jpInformacion.setBackground(new Color(232, 246, 239));
         jpPrincipal.add(jpInformacion);
 
         //Fondo del panel princicipal
-        im2 = new Decolib("/img/Fondopanel2.png");
+        im2 = new Decolib("/img/Fondopanel3.png");
         im2.setBounds(0,0, 1196, 636);
         jpPrincipal.add(im2);
 

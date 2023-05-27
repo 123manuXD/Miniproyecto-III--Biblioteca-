@@ -16,7 +16,7 @@ import vista.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class Controlergnltr {
+//public class Controlergnltr {
     //private static String generoliterarioEncabezado[] = {"ID genero", "Nombre genero"};
     
-}
+//}

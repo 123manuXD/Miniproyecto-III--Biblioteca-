@@ -13,9 +13,7 @@
 package DAO;
 import modelo.*;
 
-public interface GnrliteraDAO extends ComunDAO<generoliterario>{
-    public abstract String [][]getlistarApartado(String apartado);
-
+public interface GnrliteraDAO extends ComunDAO<Generoliterario>{
 }
 
 

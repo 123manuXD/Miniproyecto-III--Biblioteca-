@@ -20,48 +20,64 @@ import java.util.*;
 
 public class GnrliteraDAOimp implements GnrliteraDAO, Serializable{
     public static final long serialVersionUID = 1L;
-    private HashMap<Integer, generoliterario> mapa;
+    private HashMap<Integer, Generoliterario> mapa;
 
-    @Override
-    public boolean añadir(generoliterario kon) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'añadir'");
+    public GnrliteraDAOimp(){
+        this.mapa = new HashMap<>();
     }
 
     @Override
-    public boolean elementoPresente(Integer identificacion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'elementoPresente'");
+    public boolean añadir(Generoliterario kon) {
+        if(mapa.containsKey(kon.getcodigogenero()))
+            return false;
+        
+        mapa.put(kon.getcodigogenero(), kon);
+        return true;
+        
     }
 
     @Override
-    public generoliterario getElemento(Integer identificacion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getElemento'");
+    public boolean elementoPresente(Integer identificador) {
+        if(mapa.containsKey(identificador))
+            return true;
+        return false;
+    }
+
+    @Override
+    public Generoliterario getElemento(Integer identificador) {
+        if(mapa.containsKey(identificador))
+            return mapa.get(identificador);
+        return null;
     }
 
     @Override
     public String[][] getListables() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getListables'");
+        ArrayList<Generoliterario> lista = new ArrayList<>();
+
+        if(!mapa.isEmpty())
+            for(Map.Entry<Integer, Generoliterario> pareja: mapa.entrySet())
+                lista.add(pareja.getValue());
+        
+        return Array.getArray(null);
+
     }
 
     @Override
-    public boolean actualizar(Integer identificacion, generoliterario kon) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    public boolean actualizar(Integer identificador, Generoliterario kon) {
+        if(identificador.equals(kon.getcodigogenero())){
+            mapa.replace(identificador, kon);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean eliminar(Integer identificacion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
-    }
-
-    @Override
-    public String[][] getlistarApartado(String apartado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getlistarApartado'");
+    public boolean eliminar(Integer identificador) {
+        if(mapa.containsKey(identificador)){
+            mapa.remove(identificador);
+            return true;
+        }
+        return false;
     }
 
 }

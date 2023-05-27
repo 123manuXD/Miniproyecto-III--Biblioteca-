@@ -14,14 +14,14 @@ package modelo;
 import java.io.Serializable;
 import java.util.*;
 
-public abstract class generoliterario implements Serializable{
+public abstract class Generoliterario implements Serializable{
     public static final long serialVersionUID = 1L;
     private static final int datosTotales = 2;
     private Integer codigo;
     private String genero;
 
 
-    public generoliterario (Integer codigo, String genero){
+    public Generoliterario (Integer codigo, String genero){
         this.codigo = codigo;
         this.genero = genero;
     }
@@ -46,8 +46,8 @@ public abstract class generoliterario implements Serializable{
         this.codigo = codigo;
     }
 
-    public String getDato (int dato){
-        switch(dato){
+    public String getDato (int pkdato){
+        switch(pkdato){
             case 0:
                 return String.valueOf(codigo);
             case 1:

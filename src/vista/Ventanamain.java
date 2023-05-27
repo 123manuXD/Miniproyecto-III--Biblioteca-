@@ -1,16 +1,36 @@
+/*
+ Archivo: Ventanamain.java
+ Proyecto III - Biblioteca univalle
+ 21 de mayo de 2022
+
+ Autores:
+  @author Manuel Felipe Cardoso Forero (2027288)
+  @author Juan David Rodriguez Rubio (2025435) 
+ 
+ */
+
+
 package vista;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.imageio.stream.FileCacheImageInputStream;
 import javax.swing.*;
 
 
 public class Ventanamain extends JFrame implements ActionListener{
 
-    private JPanel jpLista, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite;
+    private JTable DatosEnTabla;
+    private JScrollPane Paneltable;
+    private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite;
     //botones CRUD
     private JButton btnagregar, btnlimpiar, btneditar, btneliminar, btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
     private Decolib im1, im2, im3, im4, im5, im6, im7, imlist, imr1, imr2;
+    
+    // Genero literario
+    private JLabel lblcodGen, lblGenname;
+    private JTextField filedcodg, fieldnameg;
 
     private String[] opcionesApartado = {"Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
     private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
@@ -20,9 +40,11 @@ public class Ventanamain extends JFrame implements ActionListener{
         im1 = new Decolib("/img/Fondo2.png");
         im1.setBounds(0, 0, 1280, 720 );
         add(im1);
+
     }
 
     private void iniciarComponentes(){
+
         //Config JFRAME
         setTitle("Biblioteca Univalle");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,6 +53,13 @@ public class Ventanamain extends JFrame implements ActionListener{
         setVisible(true);
         setResizable(false);
         setLayout(null);
+
+        //Fuente usada por los txt y los labels
+        Font nuevaTipografia = new Font("Courier New", Font.BOLD, 20);
+        Color colorletras = new Color(74,39,23);
+
+        //Color de fondo
+        Color colorfondo = new Color(232, 246, 239);
 
         //Configurar panel principal 
         jpPrincipal = new JPanel();
@@ -96,15 +125,24 @@ public class Ventanamain extends JFrame implements ActionListener{
         jpLista.setBackground(new Color(0,0,0,0));
         jpPrincipal.add(jpLista);
 
-        imlist = new Decolib("/img/panelLista.png");
-        imlist.setBounds(0,0, 552, 494);
-        jpLista.add(imlist);
 
         dropApartado.setBounds((int)185.38, (int)68.34 , (int)338.82, (int)22.52);
         dropApartado.setOpaque(true);
         dropApartado.setBackground(new Color(225,225,225));
-        dropApartado.setFont(new Font("arial", Font.ROMAN_BASELINE, 15));
+        dropApartado.setFont(nuevaTipografia);
+        dropApartado.setForeground(colorletras);
+        dropApartado.setBackground(colorfondo);
         jpLista.add(dropApartado); 
+
+        jpconTablas = new JPanel();
+        jpconTablas.setLayout(null);
+        jpconTablas.setBounds(18,121, 512,347);
+        jpconTablas.setBackground(new Color(100,0,0));
+        jpLista.add(jpconTablas);
+
+        imlist = new Decolib("/img/panelLista.png");
+        imlist.setBounds(0,0, 552, 494);
+        jpLista.add(imlist);
 
         //Configuracion para el panel donde se tomara la informacion
 
@@ -162,25 +200,56 @@ public class Ventanamain extends JFrame implements ActionListener{
         jprplace.setBackground(new Color(90, 0, 0));
         jpInformacion.add(jprplace);
 
+        // Panel para añadir todo lo correspondiente a el usario
         jpuser = new JPanel();
         jpuser.setBounds(0, 0, 523, 172);
         jpuser.setLayout(null);
         jpuser.setBackground(new Color(150, 0, 0));
 
+        // Panel para añadir todo lo correspondiente al recurso
         jprecur = new JPanel();
         jprecur.setBounds(0, 0, 523, 172);
         jprecur.setLayout(null);
         jprecur.setBackground(new Color(100, 0, 0));
 
+        // Panel para añadir todo lo correspondiente a el autor
         jpautor = new JPanel();
         jpautor.setBounds(0, 0, 523, 172);
         jpautor.setLayout(null);
         jpautor.setBackground(new Color(250, 0, 0));
 
+        // Panel para añadir todo lo correspondiente a el genero literario
         jpgnrlite = new JPanel();
         jpgnrlite.setBounds(0, 0, 523, 172);
         jpgnrlite.setLayout(null);
-        jpgnrlite.setBackground(new Color(50, 0, 0));
+        jpgnrlite.setBackground(new Color(232, 246, 239));
+
+        lblcodGen = new JLabel("ID genero lt:");
+        lblcodGen.setBounds((int)29.5, (int)13.5, 185, 30);
+        lblcodGen.setFont(nuevaTipografia);
+        lblcodGen.setForeground(colorletras);
+
+        lblGenname = new JLabel("Gnero Literaio:");
+        lblGenname.setBounds((int)29.5, (int)54.5, 185, 30);
+        lblGenname.setFont(nuevaTipografia);
+        lblGenname.setForeground(colorletras);
+
+        filedcodg = new JTextField();
+        filedcodg.setBounds((int)225.5, (int)13.5, 265, 30);
+        filedcodg.setFont(nuevaTipografia);
+        filedcodg.setForeground(colorletras);
+        filedcodg.setBackground(colorfondo);
+
+        fieldnameg = new JTextField();
+        fieldnameg.setBounds((int)225.5, (int)54.5, 265, 30);
+        fieldnameg.setFont(nuevaTipografia);
+        fieldnameg.setForeground(colorletras);
+        fieldnameg.setBackground(colorfondo);
+        
+        jpgnrlite.add(lblcodGen);
+        jpgnrlite.add(lblGenname);
+        jpgnrlite.add(filedcodg);
+        jpgnrlite.add(fieldnameg);
 
         //Fondo panel informacion
         imr1 = new Decolib("/img/panelDatos.png");
@@ -213,11 +282,49 @@ public class Ventanamain extends JFrame implements ActionListener{
 
     }
 
+    public void addListener(ActionListener botonesCRUD){
+        btnagregar.addActionListener(botonesCRUD);
+        btneliminar.addActionListener(botonesCRUD);
+        btneditar.addActionListener(botonesCRUD);
+        btnlimpiar.addActionListener(botonesCRUD);
+        dropApartado.addActionListener(botonesCRUD);
+        
+    }
+
     private void mostralpanel(JPanel show){
         jprplace.removeAll();
         jprplace.add(show);
         jprplace.revalidate();
         jprplace.repaint();
+    }
+
+    public JTextField getFiledcodg() {
+        return filedcodg;
+    }
+
+    public JTextField getFieldnameg() {
+        return fieldnameg;
+    }
+
+    public JTable getDatosEnTabla() {
+        return DatosEnTabla;
+    }
+
+    public void setDatosEnTabla(JTable datosEnTabla) {
+        this.DatosEnTabla = datosEnTabla;
+    }
+
+    public JScrollPane getPaneltable() {
+        return Paneltable;
+    }
+
+    public void setPaneltable(JScrollPane paneltable) {
+        this.Paneltable = paneltable;
+        jpconTablas.add(paneltable);
+    }
+
+    public JPanel getPanelTablas(){
+        return jpconTablas;
     }
 
 }

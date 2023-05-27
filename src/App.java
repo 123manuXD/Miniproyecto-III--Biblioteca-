@@ -1,9 +1,13 @@
 
-/**
- * Archivo: Main.java
- * @author Manuel Felipe Cardoso Forero (2027288)
- * @author Juan David Rodriguez Rubio (2025435)
- * Fecha de creación: 21/05/2023
+/*
+ Archivo: app.java
+ Proyecto III - Biblioteca univalle
+ 21 de mayo de 2022
+
+ Autores:
+  @author Manuel Felipe Cardoso Forero (2027288)
+  @author Juan David Rodriguez Rubio (2025435) 
+ 
  */
 
 import vista.Ventanamain;

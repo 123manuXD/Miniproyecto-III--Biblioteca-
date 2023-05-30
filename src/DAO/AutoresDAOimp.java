@@ -27,37 +27,53 @@ public class AutoresDAOimp implements AutoresDAO, Serializable{
 
     @Override
     public boolean añadir(Autores kon) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'añadir'");
+        if(mapa.containsKey(kon.getCodigoAutor()))
+            return false;
+        
+        mapa.put(kon.getCodigoAutor(), kon);
+        return true;
     }
 
     @Override
     public boolean elementoPresente(Integer identificador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'elementoPresente'");
+        if(mapa.containsKey(identificador))
+            return true;
+        return false;
     }
 
     @Override
     public Autores getElemento(Integer identificador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getElemento'");
+        if(mapa.containsKey(identificador))
+            return mapa.get(identificador);
+        return null;
     }
 
     @Override
     public String[][] getListables() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getListables'");
+        ArrayList<Autores> lista = new ArrayList<>();
+
+        if(!mapa.isEmpty())
+            for(Map.Entry<Integer, Autores> pareja: mapa.entrySet())
+                lista.add(pareja.getValue());
+        
+        return Array.getArray(null);
     }
 
     @Override
     public boolean actualizar(Integer identificador, Autores kon) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+        if(identificador.equals(kon.getCodigoAutor())){
+            mapa.replace(identificador, kon);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean eliminar(Integer identificador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        if(mapa.containsKey(identificador)){
+            mapa.remove(identificador);
+            return true;
+        }
+        return false;
     }
 }

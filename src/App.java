@@ -10,10 +10,13 @@
  
  */
 
-import vista.Ventanamain;
+import controlador.ControladorVentana;
+import vista.VentanaMain;
 
  public class App {
     public static void main(String args[]){
-        Ventanamain ventana = new Ventanamain();
+        VentanaMain ventanaMain = new VentanaMain();
+        ControladorVentana actualizarVentanaMain = new ControladorVentana(ventanaMain);
+
     }
 }

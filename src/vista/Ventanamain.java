@@ -1,5 +1,5 @@
 /*
- Archivo: Ventanamain.java
+ Archivo: VentanaMain.java
  Proyecto III - Biblioteca univalle
  21 de mayo de 2022
 
@@ -19,10 +19,10 @@ import javax.imageio.stream.FileCacheImageInputStream;
 import javax.swing.*;
 
 
-public class Ventanamain extends JFrame implements ActionListener{
+public class VentanaMain extends JFrame implements ActionListener{
 
-    private JTable DatosEnTabla;
-    private JScrollPane Paneltable;
+    private JTable DatosEnTabla = new JTable();
+    private JScrollPane Paneltable = new JScrollPane();
     private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite;
     //botones CRUD
     private JButton btnagregar, btnlimpiar, btneditar, btneliminar, btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
@@ -32,10 +32,10 @@ public class Ventanamain extends JFrame implements ActionListener{
     private JLabel lblcodGen, lblGenname;
     private JTextField filedcodg, fieldnameg;
 
-    private String[] opcionesApartado = {"Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
+    private String[] opcionesApartado = {"Selecione EL Apartado"," Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
     private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
 
-    public Ventanamain (){
+    public VentanaMain (){
         iniciarComponentes();
         im1 = new Decolib("/img/Fondo2.png");
         im1.setBounds(0, 0, 1280, 720 );
@@ -325,6 +325,14 @@ public class Ventanamain extends JFrame implements ActionListener{
 
     public JPanel getPanelTablas(){
         return jpconTablas;
+    }
+
+    public JComboBox<String> getApartado() {
+        return dropApartado;
+    }
+
+    public void setDropApartado(JComboBox<String> dropApartado) {
+        this.dropApartado = dropApartado;
     }
 
 }

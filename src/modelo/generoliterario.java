@@ -14,14 +14,14 @@ package modelo;
 import java.io.Serializable;
 import java.util.*;
 
-public  class generoliterario implements Serializable{
+public  class Generoliterario implements Serializable{
     public static final long serialVersionUID = 1L;
     private static final int datosTotales = 2;
     private Integer codigo;
     private String genero;
 
 
-    public generoliterario (Integer codigo, String genero){
+    public Generoliterario (Integer codigo, String genero){
         this.codigo = codigo;
         this.genero = genero;
     }

@@ -18,10 +18,12 @@ public class Autores implements Serializable{
     private static final int datosTotales = 2;
     private Integer codigo;
     private String nombreAutor;
+    private String relevancia;
 
-    public Autores (Integer codigo, String nombreAutor){
+    public Autores (Integer codigo, String nombreAutor, String relevancia){
         this.codigo = codigo;
         this.nombreAutor = nombreAutor;
+        this.relevancia = relevancia;
     }
     // Getter
     public Integer getCodigoAutor(){
@@ -30,6 +32,10 @@ public class Autores implements Serializable{
 
     public String getNombreAutor(){
         return nombreAutor;
+    }
+
+    public String getRelevancia() {
+        return relevancia;
     }
 
     public int getDatosTotales(){
@@ -44,12 +50,18 @@ public class Autores implements Serializable{
         this.nombreAutor = nombreAutor;
     }
 
+    public void setRelevancia(String relevancia) {
+        this.relevancia = relevancia;
+    }
+
     public String getDato (int pkdato){
         switch(pkdato){
             case 0:
                 return String.valueOf(codigo);
             case 1:
                 return String.valueOf(nombreAutor);
+            case 2:
+                return String.valueOf(relevancia);
             default:
                 return "";
         }

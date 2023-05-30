@@ -17,6 +17,7 @@ import java.awt.event.*;
 
 import javax.imageio.stream.FileCacheImageInputStream;
 import javax.swing.*;
+import javax.swing.tree.FixedHeightLayoutCache;
 
 
 public class VentanaMain extends JFrame implements ActionListener{
@@ -27,12 +28,24 @@ public class VentanaMain extends JFrame implements ActionListener{
     //botones CRUD
     private JButton btnagregar, btnlimpiar, btneditar, btneliminar, btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
     private Decolib im1, im2, im3, im4, im5, im6, im7, imlist, imr1, imr2;
-    
+
+    //Usario
+    private JLabel lblUsarioCod, lblUsarioNombre, lblUsarioTipo;
+    private JTextField fildUsarioCod, fildUsarioNombre;
+    private String[] tipoUsuario = {"Seleccione Tipo","Estudiante","Profesor","Administrador"};
+    private JComboBox<String> dropUsarioTipo = new JComboBox<>(tipoUsuario);
+ 
+    //Recurso
+
+    //Autores
+    private JLabel lblcodAutor, lblAutorname, lblRelevancia;
+    private JTextField fildAutorcod, fildAutorname, fildAutorRele;
+ 
     // Genero literario
     private JLabel lblcodGen, lblGenname;
     private JTextField filedcodg, fieldnameg;
 
-    private String[] opcionesApartado = {"Selecione EL Apartado"," Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
+    private String[] opcionesApartado = {"Selecione EL Apartado","Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
     private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
 
     public VentanaMain (){
@@ -128,7 +141,6 @@ public class VentanaMain extends JFrame implements ActionListener{
 
         dropApartado.setBounds((int)185.38, (int)68.34 , (int)338.82, (int)22.52);
         dropApartado.setOpaque(true);
-        dropApartado.setBackground(new Color(225,225,225));
         dropApartado.setFont(nuevaTipografia);
         dropApartado.setForeground(colorletras);
         dropApartado.setBackground(colorfondo);
@@ -204,7 +216,47 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpuser = new JPanel();
         jpuser.setBounds(0, 0, 523, 172);
         jpuser.setLayout(null);
-        jpuser.setBackground(new Color(150, 0, 0));
+        jpuser.setBackground(colorfondo);
+
+        lblUsarioCod = new JLabel("ID Usuario");
+        lblUsarioCod.setBounds((int)29.5, (int)13.5, 185, 30);
+        lblUsarioCod.setFont(nuevaTipografia);
+        lblUsarioCod.setForeground(colorletras);
+
+        lblUsarioNombre = new JLabel("Nombre|Apellido");
+        lblUsarioNombre.setBounds((int)29.5, (int)54.5, 185, 30);
+        lblUsarioNombre.setFont(nuevaTipografia);
+        lblUsarioNombre.setForeground(colorletras);
+
+        lblUsarioTipo = new JLabel("Tipo Usuario");
+        lblUsarioTipo.setBounds((int)29.5, (int)95.5, 185, 30);
+        lblUsarioTipo.setFont(nuevaTipografia);
+        lblUsarioTipo.setForeground(colorletras);
+
+        fildUsarioCod = new JTextField();
+        fildUsarioCod.setBounds((int)225.5, (int)13.5, 265, 30);
+        fildUsarioCod.setFont(nuevaTipografia);
+        fildUsarioCod.setForeground(colorletras);
+        fildUsarioCod.setBackground(colorfondo);
+
+        fildUsarioNombre = new JTextField();
+        fildUsarioNombre.setBounds((int)225.5, (int)54.5, 265, 30);
+        fildUsarioNombre.setFont(nuevaTipografia);
+        fildUsarioNombre.setForeground(colorletras);
+        fildUsarioNombre.setBackground(colorfondo);
+
+        dropUsarioTipo.setBounds((int)225.5, (int)95.5, 265, 30);
+        dropUsarioTipo.setOpaque(true);
+        dropUsarioTipo.setFont(nuevaTipografia);
+        dropUsarioTipo.setForeground(colorletras);
+        dropUsarioTipo.setBackground(colorfondo);
+
+        jpuser.add(lblUsarioCod);
+        jpuser.add(lblUsarioNombre);
+        jpuser.add(lblUsarioTipo);
+        jpuser.add(fildUsarioCod);
+        jpuser.add(fildUsarioNombre);
+        jpuser.add(dropUsarioTipo);
 
         // Panel para añadir todo lo correspondiente al recurso
         jprecur = new JPanel();
@@ -216,7 +268,47 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpautor = new JPanel();
         jpautor.setBounds(0, 0, 523, 172);
         jpautor.setLayout(null);
-        jpautor.setBackground(new Color(250, 0, 0));
+        jpautor.setBackground(colorfondo);
+
+        lblcodAutor = new JLabel("ID autor");
+        lblcodAutor.setBounds((int)29.5, (int)13.5, 185, 30);
+        lblcodAutor.setFont(nuevaTipografia);
+        lblcodAutor.setForeground(colorletras);
+
+        lblAutorname = new JLabel("Nombre|Apellido");
+        lblAutorname.setBounds((int)29.5, (int)54.5, 185, 30);
+        lblAutorname.setFont(nuevaTipografia);
+        lblAutorname.setForeground(colorletras);
+
+        lblRelevancia = new JLabel("Relevancia");
+        lblRelevancia.setBounds((int)29.5, (int)95.5, 185, 30);
+        lblRelevancia.setFont(nuevaTipografia);
+        lblRelevancia.setForeground(colorletras);
+
+        fildAutorcod = new JTextField();
+        fildAutorcod.setBounds((int)225.5, (int)13.5, 265, 30);
+        fildAutorcod.setFont(nuevaTipografia);
+        fildAutorcod.setForeground(colorletras);
+        fildAutorcod.setBackground(colorfondo);
+
+        fildAutorname = new JTextField();
+        fildAutorname.setBounds((int)225.5, (int)54.5, 265, 30);
+        fildAutorname.setFont(nuevaTipografia);
+        fildAutorname.setForeground(colorletras);
+        fildAutorname.setBackground(colorfondo);
+
+        fildAutorRele = new JTextField();
+        fildAutorRele.setBounds((int)225.5, (int)95.5, 265, 30);
+        fildAutorRele.setFont(nuevaTipografia);
+        fildAutorRele.setForeground(colorletras);
+        fildAutorRele.setBackground(colorfondo);
+
+        jpautor.add(lblcodAutor);
+        jpautor.add(lblAutorname);
+        jpautor.add(lblRelevancia);
+        jpautor.add(fildAutorcod);
+        jpautor.add(fildAutorname);
+        jpautor.add(fildAutorRele);
 
         // Panel para añadir todo lo correspondiente a el genero literario
         jpgnrlite = new JPanel();
@@ -298,6 +390,53 @@ public class VentanaMain extends JFrame implements ActionListener{
         jprplace.repaint();
     }
 
+    /*------------ PARA Usuarios (Getters and Setters) -------------------*/
+
+    public JLabel getLblUsarioCod() {
+        return lblUsarioCod;
+    }
+
+    public JLabel getLblUsarioNombre() {
+        return lblUsarioNombre;
+    }
+
+    public JLabel getLblUsarioTipo() {
+        return lblUsarioTipo;
+    }
+
+    
+    public JTextField getFildUsarioCod() {
+        return fildUsarioCod;
+    }
+
+    public JTextField getFildUsarioNombre() {
+        return fildUsarioNombre;
+    }
+
+    public JComboBox<String> getDropUsarioTipo() {
+        return dropUsarioTipo;
+    }
+
+    public void setDropUsarioTipo(JComboBox<String> dropUsarioTipo) {
+        this.dropUsarioTipo = dropUsarioTipo;
+    }
+    
+    /*------------ PARA AUTORES(Getters) -------------------*/
+
+    public JTextField getFildAutorcod() {
+        return fildAutorcod;
+    }
+
+    public JTextField getFildAutorname() {
+        return fildAutorname;
+    }
+
+    public JTextField getFildAutorRele() {
+        return fildAutorRele;
+    }
+    
+    /*------------ PARA GENERO LITERARIO(Getters) -------------------*/
+
     public JTextField getFiledcodg() {
         return filedcodg;
     }
@@ -305,7 +444,9 @@ public class VentanaMain extends JFrame implements ActionListener{
     public JTextField getFieldnameg() {
         return fieldnameg;
     }
-
+    
+    /*------------ PARA LOS DEMAS ELEMENTOS  -------------------*/
+    
     public JTable getDatosEnTabla() {
         return DatosEnTabla;
     }

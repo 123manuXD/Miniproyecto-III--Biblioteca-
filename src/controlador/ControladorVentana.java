@@ -77,7 +77,6 @@ public class ControladorVentana {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Genero")){
-                ControladorGenero.pintar(ventanaMain, serialGenero);
                 apartadoFormulario = "generoform";
             } else if (e.getActionCommand().equals("Autor")){
                 apartadoFormulario = "autoresform";

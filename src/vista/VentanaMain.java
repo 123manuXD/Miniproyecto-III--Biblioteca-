@@ -347,7 +347,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         filedcodg.setFont(nuevaTipografia);
         filedcodg.setForeground(colorletras);
         filedcodg.setBackground(colorfondo);
-        filedcodg.setEditable(true);
+        filedcodg.setEditable(false);
 
         fieldnameg = new JTextField();
         fieldnameg.setBounds((int)225.5, (int)54.5, 265, 30);

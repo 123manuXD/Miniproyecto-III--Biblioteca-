@@ -13,11 +13,15 @@ package controlador;
 
 import modelo.*;
 import vista.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class ControladorGenero {
+    private String apartadoGenero;
 
     private static String generoliterarioEncabezado[] = {"ID genero literario", "Nombre genero literario"};
     
@@ -36,6 +40,16 @@ public class ControladorGenero {
 
     public static String[] getTitleGenero() {
         return generoliterarioEncabezado;
+    }
+
+    class AddListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evento) {
+            if(evento.getActionCommand().equals("Genero")){
+                apartadoGenero = "generoform";
+                revisarGeneroCampos(null);
+            }
+        }
     }
 
     public static boolean revisarGeneroCampos(VentanaMain ventanaMain){

@@ -21,18 +21,25 @@ public class ControladorGenero {
 
     private static String generoliterarioEncabezado[] = {"ID genero literario", "Nombre genero literario"};
     
-    public static void limpiar(VentanaMain VentanaMain, Integer codSerialgrlt){
+
+    public static void pintar(VentanaMain ventanaMain, Integer codSerialgrlt) {
+        ventanaMain.getFiledcodg().setText(String.valueOf(codSerialgrlt));
+        
+    }
+
+
+    public static void limpiar(VentanaMain ventanaMain, Integer codSerialgrlt){
         //Este metodo dejara los valores default() del codigo generado a difault
-        VentanaMain.getFiledcodg().setText(String.valueOf(codSerialgrlt));
-        VentanaMain.getFieldnameg().setText("");
+        ventanaMain.getFiledcodg().setText(String.valueOf(codSerialgrlt));
+        ventanaMain.getFieldnameg().setText("");
     }
 
     public static String[] getTitleGenero() {
         return generoliterarioEncabezado;
     }
 
-    public static boolean revisarGeneroCampos(VentanaMain ventanamain){
-        String generoLiterariochk = ventanamain.getFieldnameg().getText();
+    public static boolean revisarGeneroCampos(VentanaMain ventanaMain){
+        String generoLiterariochk = ventanaMain.getFieldnameg().getText();
         if(generoLiterariochk.isEmpty() || generoLiterariochk.isBlank() || generoLiterariochk == null){
             JOptionPane.showMessageDialog(null, "Porfavor Ingrese un genero Literario", "Advertencia", JOptionPane.ERROR_MESSAGE);
             return false;

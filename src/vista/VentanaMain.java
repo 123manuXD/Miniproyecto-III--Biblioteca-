@@ -26,7 +26,10 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JScrollPane Paneltable = new JScrollPane();
     private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite;
     //botones CRUD
-    private JButton btnagregar, btnlimpiar, btneditar, btneliminar, btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
+    private JButton btnagregar, btnlimpiar, btneditar, btneliminar;
+  
+    //botones cambio de paneles
+    private JButton btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
     private Decolib im1, im2, im3, im4, im5, im6, im7, imlist, imr1, imr2;
 
     //Usario
@@ -45,8 +48,11 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JLabel lblcodGen, lblGenname;
     private JTextField filedcodg, fieldnameg;
 
-    private String[] opcionesApartado = {"Selecione EL Apartado","Usuarios", "Recursos", "Autores", "Géneros literarios", "Préstamo"};
+    private String[] opcionesApartado = {"Selecione EL Apartado","Usuarios", "Recursos", "Autores", "Genero literario", "Prestamo"};
     private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
+
+    private Integer apartadoForm = 0;
+    
 
     public VentanaMain (){
         iniciarComponentes();
@@ -69,6 +75,7 @@ public class VentanaMain extends JFrame implements ActionListener{
 
         //Fuente usada por los txt y los labels
         Font nuevaTipografia = new Font("Courier New", Font.BOLD, 20);
+        Font nuevaTipografia2 = new Font("Courier New", Font.BOLD, 55);
         Color colorletras = new Color(74,39,23);
 
         //Color de fondo
@@ -81,28 +88,28 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpPrincipal.setBackground(new Color(0, 0, 0, 0));
         add(jpPrincipal);
         
-        btnagregar = new JButton("");
+        btnagregar = new JButton("Agregar");
         btnagregar.setBounds((int)629.5, (int)409.5,232, 67);
         btnagregar.setOpaque(true);
         btnagregar.setContentAreaFilled(false);
         btnagregar.setLayout(null);
         jpPrincipal.add(btnagregar);
 
-        btneliminar = new JButton();
+        btneliminar = new JButton("Eliminar");
         btneliminar.setBounds((int)887.5, (int)409.5,232, 67);
         btneliminar.setOpaque(true);
         btneliminar.setContentAreaFilled(false);
         btneliminar.setLayout(null);
         jpPrincipal.add(btneliminar);
 
-        btnlimpiar = new JButton("");
+        btnlimpiar = new JButton("Limpiar");
         btnlimpiar.setBounds((int)629.5, (int)493.5,232, 67);
         btnlimpiar.setOpaque(true);
         btnlimpiar.setContentAreaFilled(false);
         btnlimpiar.setLayout(null);
         jpPrincipal.add(btnlimpiar);
 
-        btneditar = new JButton();
+        btneditar = new JButton("Editar");
         btneditar.setBounds((int)887.5, (int)493.5,232, 67);
         btneditar.setOpaque(true);
         btneditar.setContentAreaFilled(false);
@@ -147,9 +154,9 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpLista.add(dropApartado); 
 
         jpconTablas = new JPanel();
-        jpconTablas.setLayout(null);
+        //jpconTablas.setLayout(null);
         jpconTablas.setBounds(18,121, 512,347);
-        jpconTablas.setBackground(new Color(100,0,0));
+        jpconTablas.setBackground(colorfondo);
         jpLista.add(jpconTablas);
 
         imlist = new Decolib("/img/panelLista.png");
@@ -164,42 +171,51 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpInformacion.setBackground(new Color(0, 0, 0,0));
         jpPrincipal.add(jpInformacion);
 
-        btnusario = new JButton();
+        btnusario = new JButton("Usario");
         btnusario.setBounds(7, 11,101, 29);
         btnusario.setOpaque(true);
         btnusario.setContentAreaFilled(false);
         btnusario.setLayout(null);
         btnusario.setBorderPainted(false);
+        btnusario.setFont(nuevaTipografia2);
+        btnusario.setForeground(new Color(0,0,0,0));
         jpInformacion.add(btnusario);
 
-        btnrecurso = new JButton();
+        btnrecurso = new JButton("Recurso");
         btnrecurso.setBounds(117, 11,101, 29);
         btnrecurso.setOpaque(true);
         btnrecurso.setContentAreaFilled(false);
         btnrecurso.setLayout(null);
+        btnrecurso.setFont(nuevaTipografia2);
+        btnrecurso.setForeground(new Color(0,0,0,0));
         btnrecurso.setBorderPainted(false);
         jpInformacion.add(btnrecurso);
 
-        btnautor = new JButton();
+        btnautor = new JButton("Autor");
         btnautor.setBounds(226, 11,101, 29);
         btnautor.setOpaque(true);
         btnautor.setContentAreaFilled(false);
+        btnautor.setFont(nuevaTipografia2);
+        btnautor.setForeground(new Color(0,0,0,0));
         btnautor.setLayout(null);
         btnautor.setBorderPainted(false);
         jpInformacion.add(btnautor);
 
-        btngnrliterario = new JButton();
+        btngnrliterario = new JButton("Genero");
         btngnrliterario.setBounds(335, 11,101, 29);
         btngnrliterario.setOpaque(true);
         btngnrliterario.setContentAreaFilled(false);
         btngnrliterario.setLayout(null);
         btngnrliterario.setBorderPainted(false);
+        btngnrliterario.setFont(nuevaTipografia2);
+        btngnrliterario.setForeground(new Color(0,0,0,0));
         jpInformacion.add(btngnrliterario);
 
         btnusario.addActionListener(this);
         btnrecurso.addActionListener(this);
         btnautor.addActionListener(this);
-        btngnrliterario.addActionListener(this); 
+        btngnrliterario.addActionListener(this);
+        dropApartado.addActionListener(this); 
 
         /* 
          * Voy a crear un apartado donde creare un panel base para poder remplazar, en otros subpaneles
@@ -331,6 +347,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         filedcodg.setFont(nuevaTipografia);
         filedcodg.setForeground(colorletras);
         filedcodg.setBackground(colorfondo);
+        filedcodg.setEditable(true);
 
         fieldnameg = new JTextField();
         fieldnameg.setBounds((int)225.5, (int)54.5, 265, 30);
@@ -353,6 +370,10 @@ public class VentanaMain extends JFrame implements ActionListener{
         im2.setBounds(0,0, 1196, 636);
         jpPrincipal.add(im2);
         
+        /* btnagregar.addActionListener(this);
+        btneliminar.addActionListener(this);
+        btneditar.addActionListener(this);
+        btnlimpiar.addActionListener(this); */
     }
      
     @Override
@@ -361,25 +382,34 @@ public class VentanaMain extends JFrame implements ActionListener{
         if(event.getSource() == btnusario){
             System.out.println("Botn de usario");
             mostralpanel(jpuser);
+            apartadoForm = 1;
         }else if (event.getSource() == btnautor){
             System.out.println("Botn de autor");
             mostralpanel(jpautor);
+            apartadoForm = 2;
         }else if (event.getSource() == btnrecurso){
             System.out.println("Botn de recurso");
             mostralpanel(jprecur);
+            apartadoForm = 3;
         }else if (event.getSource() == btngnrliterario){
             System.out.println("Botn de genero literario");
             mostralpanel(jpgnrlite);
+            apartadoForm = 4;
         }
 
     }
 
-    public void addListener(ActionListener botonesCRUD){
-        btnagregar.addActionListener(botonesCRUD);
-        btneliminar.addActionListener(botonesCRUD);
-        btneditar.addActionListener(botonesCRUD);
-        btnlimpiar.addActionListener(botonesCRUD);
-        dropApartado.addActionListener(botonesCRUD);
+    public void addListener(ActionListener listenControles){
+        dropApartado.addActionListener(listenControles);
+        btnagregar.addActionListener(listenControles);
+        btneliminar.addActionListener(listenControles);
+        btneditar.addActionListener(listenControles);
+        btnlimpiar.addActionListener(listenControles);
+        btnusario.addActionListener(listenControles);
+        btnrecurso.addActionListener(listenControles);
+        btnautor.addActionListener(listenControles);
+        btngnrliterario.addActionListener(listenControles);
+        dropApartado.addActionListener(listenControles); 
         
     }
 
@@ -444,8 +474,30 @@ public class VentanaMain extends JFrame implements ActionListener{
     public JTextField getFieldnameg() {
         return fieldnameg;
     }
+
+    /*------------ PARA BOTONES CRUD(Getters) -------------------*/
+
+    public JButton getBtnagregar() {
+        return btnagregar;
+    }
+
+    public JButton getBtnlimpiar() {
+        return btnlimpiar;
+    }
+
+    public JButton getBtneditar() {
+        return btneditar;
+    }
+
+    public JButton getBtneliminar() {
+        return btneliminar;
+    }
     
     /*------------ PARA LOS DEMAS ELEMENTOS  -------------------*/
+
+    public Integer getFormulario(){
+        return apartadoForm;
+    }
     
     public JTable getDatosEnTabla() {
         return DatosEnTabla;

@@ -52,5 +52,9 @@ public class Biblioteca implements Serializable{
     public void setCodSerialgrlt(Integer codSerialgrlt) {
         this.codSerialgrlt = codSerialgrlt;
     }
+
+    public void sumarcodserialgrlt(){
+        codSerialgrlt++;
+    }
     
 }

@@ -17,13 +17,14 @@ public class Usuarios implements Serializable{
     public static final long serialVersionUID = 1L;
     private static final int datosTotales = 3;
     private Integer codigo;
-    private String tipoUsuario;
     private String nombre;
+    private String tipoUsuario;
 
-    public Usuarios (Integer codigo, String tipoUsuario, String nombre){
+    public Usuarios (Integer codigo, String nombre, String tipoUsario){
         this.codigo = codigo;
-        this.tipoUsuario = tipoUsuario;
         this.nombre = nombre;
+        this.tipoUsuario = tipoUsuario;
+        
     }
     // Getter
     public Integer getCodigoUsuario(){
@@ -59,9 +60,9 @@ public class Usuarios implements Serializable{
             case 0:
                 return String.valueOf(codigo);
             case 1:
-                return String.valueOf(tipoUsuario);
-            case 2:
                 return String.valueOf(nombre);
+            case 2:
+                return String.valueOf(tipoUsuario);
             default:
                 return "";
         }

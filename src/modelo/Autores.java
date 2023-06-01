@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Autores implements Serializable{
     public static final long serialVersionUID = 1L;
-    private static final int datosTotales = 2;
+    private static final int datosTotales = 3;
     private Integer codigo;
     private String nombreAutor;
     private String relevancia;

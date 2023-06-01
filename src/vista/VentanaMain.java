@@ -474,24 +474,6 @@ public class VentanaMain extends JFrame implements ActionListener{
     public JTextField getFieldnameg() {
         return fieldnameg;
     }
-
-    /*------------ PARA BOTONES CRUD(Getters) -------------------*/
-
-    public JButton getBtnagregar() {
-        return btnagregar;
-    }
-
-    public JButton getBtnlimpiar() {
-        return btnlimpiar;
-    }
-
-    public JButton getBtneditar() {
-        return btneditar;
-    }
-
-    public JButton getBtneliminar() {
-        return btneliminar;
-    }
     
     /*------------ PARA LOS DEMAS ELEMENTOS  -------------------*/
 

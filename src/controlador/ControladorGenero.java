@@ -17,18 +17,18 @@ import vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.*;
+import java.security.CodeSigner;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class ControladorGenero {
     private String apartadoGenero;
-
     private static String generoliterarioEncabezado[] = {"ID genero literario", "Nombre genero literario"};
+    private Integer cod;
     
-
     public static void pintar(VentanaMain ventanaMain, Integer codSerialgrlt) {
         ventanaMain.getFiledcodg().setText(String.valueOf(codSerialgrlt));
-        
     }
 
 

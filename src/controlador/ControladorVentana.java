@@ -36,23 +36,23 @@ import java.awt.*;
 public class ControladorVentana {
     private String apartadoTipo;
     private String apartadoFormulario;
-    private JButton agregar, eliminar, editar, limpiar;
     private VentanaMain ventanaMain;
     private JTable datosTable = new JTable();
     private JScrollPane paneltabla = new JScrollPane();
     String  rutaArchivoBin = "./src/Archivos/biblioteca.bin";
     private Biblioteca biblioteca;
     private Integer serialGenero;
+    private Integer serialAutor;
     
 
     public ControladorVentana(VentanaMain ventanaMain){
         this.ventanaMain = ventanaMain;
-
-        this.biblioteca = Managerecords.leerArchivoBin(rutaArchivoBin);
+        //this.biblioteca = Managerecords.leerArchivoBin(rutaArchivoBin);
         if(biblioteca == null)
         biblioteca = new Biblioteca("Biblioteca Universidad del Valle");
 
         serialGenero = biblioteca.getCodSerialgrlt();
+        serialAutor = biblioteca.getCodSerialAutor();
 
         ventanaMain.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -66,9 +66,9 @@ public class ControladorVentana {
         ventanaMain.setVisible(true);
         this.ventanaMain.addListener(new AddListener());
         apartadoTipo = (String)ventanaMain.getApartado().getSelectedItem();
-        pintartabla(apartadoFormulario);
-        System.out.println(apartadoTipo);
-        System.out.println(ventanaMain.getFormulario());
+        //pintartabla(apartadoFormulario);
+        System.out.println(biblioteca.getCodSerialAutor());
+        System.out.println(biblioteca.getCodSerialgrlt());
 
     }
 
@@ -78,7 +78,9 @@ public class ControladorVentana {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Genero")){
                 apartadoFormulario = "generoform";
+                ControladorGenero.pintar(ventanaMain, serialGenero);
             } else if (e.getActionCommand().equals("Autor")){
+                ControladorAutores.pintar(ventanaMain, serialAutor);
                 apartadoFormulario = "autoresform";
             } else if (e.getActionCommand().equals("Usuario")){
                 apartadoFormulario = "usuarioform";
@@ -100,11 +102,26 @@ public class ControladorVentana {
                                 JOptionPane.showMessageDialog(null,"El producto " + codigoGeneroLiterario + " " + nombreGeneroLiterario + " ya se encuentra registrado en el sistema, no lo puede volver a registrar.", "Advertencia", JOptionPane.ERROR_MESSAGE);
                         }
                     } 
-                } // añadir para cada formulario else if 
+                } else if (apartadoFormulario == "autoresform"){
+                    ControladorAutores.pintar(ventanaMain, serialAutor);
+                    if(ControladorAutores.revisarAutoresCampos(ventanaMain)){
+                        Autores nuevoAutor = ControladorAutores.crearAutores(ventanaMain);
+                        Integer codigoAutor = nuevoAutor.getCodigoAutor();
+                        String nombreAutor = nuevoAutor.getNombreAutor();
+                        if(biblioteca.getAutor().añadir(nuevoAutor)){
+                        JOptionPane.showMessageDialog(null, " Nuevo Autor " + "\n Codigo:" +codigoAutor + "\n Nombre|Apellido: " + nombreAutor + " \n Ha sido agregado como nuevo autor", "Agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                            serialAutor++;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El Autor" + "/n Codigo:" +codigoAutor + "/n Nombre|Apellido: " + nombreAutor + " Ya se encuetra en el sistema.", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
                 //terminar con metodo
             } else if (e.getActionCommand().equalsIgnoreCase("limpiar")){
                 if(apartadoFormulario == "generoform"){
                     ControladorGenero.limpiar(ventanaMain, serialGenero);
+                } else if (apartadoFormulario == "autoresform"){
+                    ControladorAutores.limpiar(ventanaMain, serialAutor);
                 }
                 
             } else if(e.getActionCommand().equalsIgnoreCase("Editar")){
@@ -118,6 +135,19 @@ public class ControladorVentana {
                         } else {
                             JOptionPane.showMessageDialog(null, "El genero Literario " + "\n Codigo: " + idGelt + "\n Genero Literario: " + nombreGenerolt+ "\n No existe, debe registrarlo en el sistema", "Advertencia",JOptionPane.ERROR_MESSAGE);
                         }
+                    }
+                } else if (apartadoFormulario =="autoresform"){
+                    if(ControladorAutores.revisarAutoresCampos(ventanaMain)){
+                        Autores nuevoauAutor = ControladorAutores.crearAutores(ventanaMain);
+                        Integer idAutor = nuevoauAutor.getCodigoAutor();
+                        String nombreAutor = nuevoauAutor.getNombreAutor();
+                        String relavanciaAutor = nuevoauAutor.getRelevancia();
+                        if(biblioteca.getAutor().elementoPresente(idAutor) && biblioteca.getAutor().actualizar(idAutor, nuevoauAutor)){
+                            JOptionPane.showMessageDialog(null, " !Autor  Actualizado! " + "\n Codigo: " + idAutor + "\n Autor: " + nombreAutor + "\n Relevancia" + relavanciaAutor, "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El Autor " + "\n Codigo: " + idAutor + "\n Autor: " + nombreAutor + "\n Relevancia" + relavanciaAutor + "\n No existe, debe registrarlo en el sistema", "Advertencia",JOptionPane.ERROR_MESSAGE);
+                        }
+                        
                     }
                 }
 
@@ -136,7 +166,22 @@ public class ControladorVentana {
                         }
                     }
 
-                }   
+                }else if( apartadoFormulario == "autoresform"){
+                    String stringCodAutor = ventanaMain.getFildAutorcod().getText();
+                    Integer idAutor = Integer.valueOf(stringCodAutor);
+                    if(biblioteca.getAutor().elementoPresente(idAutor)){
+                        String nombreAutor = biblioteca.getAutor().getElemento(idAutor).getNombreAutor();
+                        int seguir = JOptionPane.showConfirmDialog(null , "¿Relamente desea eliminar el Autor " + nombreAutor + "(" + idAutor + " )?\n Esta acción es Irreversible", "Eliminar Autor" ,JOptionPane.YES_NO_OPTION);
+                        if(seguir == JOptionPane.YES_OPTION && biblioteca.getAutor().eliminar(idAutor)){
+                            JOptionPane.showMessageDialog(null, "El Autor " + "\n Codigo: "+ idAutor + "\n De nombre:  " + nombreAutor + "\n Fue eliminado con exito", "Eliminacipon",JOptionPane.INFORMATION_MESSAGE);
+                            ControladorGenero.limpiar(ventanaMain, serialGenero);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El Autor"  + nombreAutor + "(" + idAutor +  ") \n No existe en el sistema", "Advertencia", JOptionPane.ERROR_MESSAGE);
+
+                        }
+                    }
+                    
+                }
             }
         }
           

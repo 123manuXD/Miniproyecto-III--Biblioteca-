@@ -22,10 +22,15 @@ public class Biblioteca implements Serializable{
     public String nombreBiblioteca;
     private GnrliteraDAO generoLiterario;
     private Integer codSerialgrlt = 6500;
+    private AutoresDAO autor;
+    private Integer codInteger = 1040780;
+
 
     public Biblioteca(String nombreBiblioteca){
         this.nombreBiblioteca = nombreBiblioteca;
         this.generoLiterario = new GnrliteraDAOimp();
+        this.autor = new AutoresDAOimp();
+
             
     }
 
@@ -45,16 +50,37 @@ public class Biblioteca implements Serializable{
         this.generoLiterario = generoLiterario;
     }
 
+    public AutoresDAO getAutor() {
+        return autor;
+    }
+
+    public void setAutor(AutoresDAO autor) {
+        this.autor = autor;
+    }
+
     public Integer getCodSerialgrlt() {
         return codSerialgrlt;
     }
+
+    public Integer getCodSerialAutor() {
+        return codInteger;
+    }
+
 
     public void setCodSerialgrlt(Integer codSerialgrlt) {
         this.codSerialgrlt = codSerialgrlt;
     }
 
+    public void setCodSerialAutor(Integer codSerialAutor) {
+        this.codInteger = codSerialAutor;
+    }
+
     public void sumarcodserialgrlt(){
         codSerialgrlt++;
+    }
+
+    public void sumarcodserialAutor(){
+        codInteger++;
     }
     
 }

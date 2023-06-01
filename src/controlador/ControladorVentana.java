@@ -35,6 +35,7 @@ import java.awt.*;
 
 public class ControladorVentana {
     private String apartadoTipo;
+    private String gluglu;
     private String apartadoFormulario;
     private VentanaMain ventanaMain;
     private JTable datosTable = new JTable();
@@ -53,6 +54,8 @@ public class ControladorVentana {
 
         serialGenero = biblioteca.getCodSerialgrlt();
         serialAutor = biblioteca.getCodSerialAutor();
+        gluglu = ventanaMain.getStringtipousario();
+        System.out.println(gluglu);
 
         ventanaMain.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -115,6 +118,18 @@ public class ControladorVentana {
                             JOptionPane.showMessageDialog(null, "El Autor" + "/n Codigo:" +codigoAutor + "/n Nombre|Apellido: " + nombreAutor + " Ya se encuetra en el sistema.", "Advertencia", JOptionPane.ERROR_MESSAGE);
                         }
                     }
+                } else if (apartadoFormulario == "usuarioform"){
+                    if(ControladorUsarios.revisarUsarioCampos(ventanaMain)){
+                        Usuarios nuevoUsuario = ControladorUsarios.crearUsuario(ventanaMain);
+                        Integer codigoUsuario = nuevoUsuario.getCodigoUsuario();
+                        String nombreUsuario = nuevoUsuario.getNombreUsuario();
+                        String tipoUsuario = nuevoUsuario.getTipoUsuario();
+                        if(biblioteca.getUsuario().añadir(nuevoUsuario)){
+                            JOptionPane.showMessageDialog(null, " EL usuario  " + "\n Codigo: " + codigoUsuario + "\n Nombre|Apellido: " + nombreUsuario + "\n De tipo: " + tipoUsuario + " \n Ha sido agregado como nuevo usuario " ,"Agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, " EL Usuario " + "\n Codigo: " +codigoUsuario + "\n Nombre|Apellido: " + nombreUsuario + " \n Ya se encuetra en el sistema", "Advertencia", JOptionPane.INFORMATION_MESSAGE); 
+                        }
+                    }
                 }
                 //terminar con metodo
             } else if (e.getActionCommand().equalsIgnoreCase("limpiar")){
@@ -122,7 +137,10 @@ public class ControladorVentana {
                     ControladorGenero.limpiar(ventanaMain, serialGenero);
                 } else if (apartadoFormulario == "autoresform"){
                     ControladorAutores.limpiar(ventanaMain, serialAutor);
+                } else if (apartadoFormulario == "usuarioform"){
+                    ControladorUsarios.limpiar(ventanaMain);
                 }
+                
                 
             } else if(e.getActionCommand().equalsIgnoreCase("Editar")){
                 if(apartadoFormulario == "generoform"){

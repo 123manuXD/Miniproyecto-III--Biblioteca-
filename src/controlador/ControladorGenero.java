@@ -25,7 +25,7 @@ import javax.swing.table.*;
 public class ControladorGenero {
     private String apartadoGenero;
     private static String generoliterarioEncabezado[] = {"ID genero literario", "Nombre genero literario"};
-    private Integer cod;
+    
     
     public static void pintar(VentanaMain ventanaMain, Integer codSerialgrlt) {
         ventanaMain.getFiledcodg().setText(String.valueOf(codSerialgrlt));

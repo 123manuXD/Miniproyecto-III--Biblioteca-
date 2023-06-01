@@ -23,6 +23,7 @@ public class Biblioteca implements Serializable{
     private GnrliteraDAO generoLiterario;
     private Integer codSerialgrlt = 6500;
     private AutoresDAO autor;
+    private UsuarioDAO usuario;
     private Integer codInteger = 1040780;
 
 
@@ -30,6 +31,7 @@ public class Biblioteca implements Serializable{
         this.nombreBiblioteca = nombreBiblioteca;
         this.generoLiterario = new GnrliteraDAOimp();
         this.autor = new AutoresDAOimp();
+        this.usuario = new UsarioDAOimp();
 
             
     }
@@ -40,6 +42,14 @@ public class Biblioteca implements Serializable{
 
     public void setNombreBiblioteca(String nombreBiblioteca) {
         this.nombreBiblioteca = nombreBiblioteca;
+    }
+
+    public UsuarioDAO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDAO usuario) {
+        this.usuario = usuario;
     }
 
     public GnrliteraDAO getGeneroLiterario() {

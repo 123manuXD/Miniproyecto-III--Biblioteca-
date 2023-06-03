@@ -173,6 +173,7 @@ public class ControladorVentana {
                         String tipoUsuario = nuevoUsuario.getTipoUsuario();
                         if(biblioteca.getUsuario().añadir(nuevoUsuario)){
                             JOptionPane.showMessageDialog(null, " EL usuario  " + "\n Codigo: " + codigoUsuario + "\n Nombre|Apellido: " + nombreUsuario + "\n De tipo: " + tipoUsuario + " \n Ha sido agregado como nuevo usuario " ,"Agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                            serialRecurso++;
                         } else {
                             JOptionPane.showMessageDialog(null, " EL Usuario " + "\n Codigo: " +codigoUsuario + "\n Nombre|Apellido: " + nombreUsuario + " \n Ya se encuetra en el sistema", "Advertencia", JOptionPane.INFORMATION_MESSAGE); 
                         }
@@ -185,7 +186,7 @@ public class ControladorVentana {
                         String autorRecurso = nuevoRecurso.getAutorRecursoS();
                         String generoRecurso = nuevoRecurso.getGeneroRecursoS();
                         if(biblioteca.getRecurso().añadir(nuevoRecurso)){
-                            JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ha sido agregado como nuevo Recurso \n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ha sido agregado como nuevo Recurso" + "\n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ya se encuentra en el sistema \n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -229,6 +230,30 @@ public class ControladorVentana {
                         }
                         
                     }
+                } else if (apartadoFormulario == "usuarioform"){
+                    if(ControladorUsarios.revisarUsarioCampos(ventanaMain)){
+                        Usuarios nuevoUsuario = ControladorUsarios.crearUsuario(ventanaMain);
+                        Integer idUsuario = nuevoUsuario.getCodigoUsuario();
+                        String nombreUsuario = nuevoUsuario.getNombreUsuario();
+                        if(biblioteca.getUsuario().elementoPresente(idUsuario) && biblioteca.getUsuario().actualizar(idUsuario, nuevoUsuario)){
+                            JOptionPane.showMessageDialog(null, " !EL Usuario" + nombreUsuario +  " fue Actualizado! " + "\n Identificador de usario : " + idUsuario + "", "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, " !EL Usuario" + nombreUsuario +  " No existe, debe registrarlo en el sistema " + "\n Identificador de usario : " + idUsuario + "", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else if (apartadoFormulario == "recursoform"){
+                    if(ControladorRecurso.revisarRecursoCampos(ventanaMain)){
+                        Recurso nuevRecurso = ControladorRecurso.crearRecurso(ventanaMain);
+                        Integer idRecurso = nuevRecurso.getCodigo();
+                        String tituloRecurso = nuevRecurso.getTitulo();
+                        String autorRecurso = nuevRecurso.getAutorRecursoS();
+                        if(biblioteca.getRecurso().elementoPresente(idRecurso) && biblioteca.getRecurso().actualizar(idRecurso, nuevRecurso)){
+                            JOptionPane.showMessageDialog(null,"!" + tituloRecurso + "Fue actualizado con exito!" + "\n Codigo de recurso: " + idRecurso + "\n Autor del recurso: " + autorRecurso,"Actualizacion Recurso", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null,"!" + tituloRecurso + "No existe, debe registrarlo en el sistema " + "\n Codigo de recurso: " + idRecurso ,"Actualizacion Recurso", JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
                 }
 
             } else if (e.getActionCommand().equalsIgnoreCase("Eliminar")){
@@ -261,6 +286,35 @@ public class ControladorVentana {
                         }
                     }
                     
+                } else if (apartadoFormulario == "usuarioform"){
+                    String stringcodUsuario = ventanaMain.getFildUsarioCod().getText();
+                    Integer idUsuario = Integer.valueOf(stringcodUsuario);
+                    if(biblioteca.getUsuario().elementoPresente(idUsuario)){
+                        String nombreUsuario = biblioteca.getUsuario().getElemento(idUsuario).getNombreUsuario();
+                        int seguir = JOptionPane.showConfirmDialog(null , "¿Relamente desea eliminar el Usuario " + nombreUsuario + "(" + idUsuario + " )?\n Esta acción es Irreversible", "Eliminar Usuario" ,JOptionPane.YES_NO_OPTION);
+                        if(seguir == JOptionPane.YES_OPTION && biblioteca.getUsuario().eliminar(idUsuario)){
+                            JOptionPane.showConfirmDialog(null , " El Usuario " + nombreUsuario + "(" + idUsuario + " )\n Fue eliminado con exito", "Eliminar Usuario" ,JOptionPane.INFORMATION_MESSAGE);
+                            ControladorUsarios.limpiar(ventanaMain);
+                        } else {
+                            JOptionPane.showConfirmDialog(null , " El Usuario " + nombreUsuario + "(" + idUsuario + " )\n No existe en el sistema", "Advertencia" ,JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
+                } else if (apartadoFormulario == "recursoform"){
+                    String StringcodRecurso = ventanaMain.getFildRecursoCod().getText();
+                    Integer idRecurso = Integer.valueOf(StringcodRecurso);
+                    if(biblioteca.getRecurso().elementoPresente(idRecurso)){
+                        String nombreRecurso = biblioteca.getRecurso().getElemento(idRecurso).getTitulo();
+                        int seguir = JOptionPane.showConfirmDialog(null , "¿Relamente desea eliminar el Recurso " + nombreRecurso + "(" + idRecurso + " )?\n Esta acción es Irreversible", "Eliminar Recurso" ,JOptionPane.YES_NO_OPTION);
+                        if(seguir == JOptionPane.YES_OPTION && biblioteca.getUsuario().eliminar(idRecurso)){
+                            JOptionPane.showConfirmDialog(null , " El Recurso " + nombreRecurso + "(" + idRecurso + " )\n Fue eliminado con exito", "Eliminar Recurso" ,JOptionPane.INFORMATION_MESSAGE);
+                            ControladorRecurso.limpiar(ventanaMain, idRecurso);
+                        } else {
+                            JOptionPane.showConfirmDialog(null , " El Recurso " + nombreRecurso + "(" + idRecurso + " )\n No existe en el sistema", "ADvertencia" ,JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
+         
                 }
             }
         }

@@ -12,6 +12,7 @@
 
 import controlador.ControladorVentana;
 import vista.VentanaMain;
+import vista.VentanaRecursos;
 
  public class App {
     public static void main(String args[]){

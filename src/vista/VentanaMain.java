@@ -24,7 +24,7 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     private JTable DatosEnTabla = new JTable();
     private JScrollPane Paneltable = new JScrollPane();
-    private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite;
+    private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite, jpPrestamo;
     //botones CRUD
     private JButton btnagregar, btnlimpiar, btneditar, btneliminar;
   
@@ -32,25 +32,25 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JButton btnusario, btnrecurso, btngnrliterario, btnautor, btnprestamo;
     private Decolib im1, im2, im3, im4, im5, im6, im7, imlist, imr1, imr2;
 
-    //Usario
+    //  ------------ PARA EL USUARIO ------------------ 
     private JLabel lblUsarioCod, lblUsarioNombre, lblUsarioTipo;
     private JTextField fildUsarioCod, fildUsarioNombre;
     private String[] tipoUsuario = {"Seleccionar","Estudiante","Profesor","Administrador"};
     private JComboBox<String> dropUsarioTipo = new JComboBox<>(tipoUsuario);
     private String stringtipousario;
  
-    //Recurso
+    //  ------------ PARA EL RECURSO ------------------ 
     private JLabel lblcodRecurso, lbltituloRecurso, lblRecDate, lblRectipo, lblRecAutor, lblRecGenlt, lblRecAutordato, lblRecGenDato;
     private JTextField fildRecursoCod, fildRecursoTitle, fildRecursoDate, fildRecusoAutor, fildRecursoGnlt, fildRecUV, fildRecGV;
    
     private String[] tipoRecurso = {"Seleccionar","Libro","Revista"};
     private JComboBox<String> dropRecursoTipo = new JComboBox<>(tipoRecurso);
 
-    //Autores
+    //  ------------ PARA EL AUTOR ------------------ 
     private JLabel lblcodAutor, lblAutorname, lblRelevancia;
     private JTextField fildAutorcod, fildAutorname, fildAutorRele;
  
-    // Genero literario
+    //  ------------ PARA EL GENERO LITERARIO ------------------ 
     private JLabel lblcodGen, lblGenname;
     private JTextField filedcodg, fieldnameg;
 
@@ -58,6 +58,11 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
 
     private Integer apartadoForm = 0;
+
+    // ------------ PARA EL PRESTAMO ------------------ 
+    private JLabel lblCodPres , lblIdUsuarioPres, lblNombreCPres, lblRecursos, lblCantidad ,lblEstado;
+    private JTextField fildPresCod, fildPresIdUs, fildPresNomUs, fildPresCantidad, fildPresEstado;
+    private JButton recursosver;
     
 
     public VentanaMain (){
@@ -82,6 +87,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         //Fuente usada por los txt y los labels
         Font nuevaTipografia = new Font("Courier New", Font.BOLD, 20);
         Font nuevaTipografia2 = new Font("Courier New", Font.BOLD, 55);
+        Font nuevaTipografia3 = new Font("Courier New", Font.BOLD, 47);
         Color colorletras = new Color(74,39,23);
 
         //Color de fondo
@@ -122,12 +128,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         btneditar.setLayout(null);
         jpPrincipal.add(btneditar);
 
-        btngnrliterario = new JButton();
-        btngnrliterario.setOpaque(true);
-        btngnrliterario.setContentAreaFilled(false);
-        btngnrliterario.setLayout(null);
         
-
         im4 = new Decolib("/img/botones/btnagregar.png");
         im4.setBounds(0,0,232, 67);
         btnagregar.add(im4);
@@ -217,10 +218,21 @@ public class VentanaMain extends JFrame implements ActionListener{
         btngnrliterario.setForeground(new Color(0,0,0,0));
         jpInformacion.add(btngnrliterario);
 
+        btnprestamo = new JButton("Pre");
+        btnprestamo.setBounds(443, 11, 88, 29);
+        btnprestamo.setOpaque(true);
+        btnprestamo.setContentAreaFilled(false);
+        btnprestamo.setLayout(null);
+        btnprestamo.setBorderPainted(false);
+        btnprestamo.setFont(nuevaTipografia3);
+        btnprestamo.setForeground(new Color (0,0,0,0));
+        jpInformacion.add(btnprestamo);
+
         btnusario.addActionListener(this);
         btnrecurso.addActionListener(this);
         btnautor.addActionListener(this);
         btngnrliterario.addActionListener(this);
+        btnprestamo.addActionListener(this);
         dropApartado.addActionListener(this); 
 
         /* 
@@ -475,6 +487,96 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpgnrlite.add(filedcodg);
         jpgnrlite.add(fieldnameg);
 
+        // Panel para añadir todos los elementos del prestamo
+        jpPrestamo = new JPanel();
+        jpPrestamo.setBounds(0, 0, 523, 338);
+        jpPrestamo.setLayout(null);
+        jpPrestamo.setBackground(new Color(232, 246, 239));
+
+        lblCodPres = new JLabel("ID Prestamo:");
+        lblCodPres.setBounds((int)29.5, (int)13.5, 185, 30);
+        lblCodPres.setFont(nuevaTipografia);
+        lblCodPres.setForeground(colorletras);
+
+        lblIdUsuarioPres = new JLabel("ID Usuario:");
+        lblIdUsuarioPres.setBounds((int)29.5, (int)54.5, 185, 30);
+        lblIdUsuarioPres.setFont(nuevaTipografia);
+        lblIdUsuarioPres.setForeground(colorletras);
+
+        lblNombreCPres = new JLabel("Nombre|User:");
+        lblNombreCPres.setBounds((int)29.5, (int)95.5, 185, 30);
+        lblNombreCPres.setFont(nuevaTipografia);
+        lblNombreCPres.setForeground(colorletras);
+
+        lblRecursos = new JLabel("Recursos|D|");
+        lblRecursos.setBounds((int)29.5, (int)136.5, 185, 30);
+        lblRecursos.setFont(nuevaTipografia);
+        lblRecursos.setForeground(colorletras);
+
+        lblCantidad = new JLabel("N° Recursos:");
+        lblCantidad.setBounds((int)29.5, (int)177.5, 185, 30);
+        lblCantidad.setFont(nuevaTipografia);
+        lblCantidad.setForeground(colorletras);
+
+        lblEstado = new JLabel("|R| Estado:");
+        lblEstado.setBounds((int)29.5, (int)218.5, 185, 30);
+        lblEstado.setFont(nuevaTipografia);
+        lblEstado.setForeground(colorletras);
+
+        fildPresCod = new JTextField();
+        fildPresCod.setBounds((int)225.5, (int)13.5, 265, 30);
+        fildPresCod.setFont(nuevaTipografia);
+        fildPresCod.setForeground(colorletras);
+        fildPresCod.setBackground(colorfondo);
+
+        fildPresIdUs = new JTextField();
+        fildPresIdUs.setBounds((int)225.5, (int)54.5, 265, 30);
+        fildPresIdUs.setFont(nuevaTipografia);
+        fildPresIdUs.setForeground(colorletras);
+        fildPresIdUs.setBackground(colorfondo);
+
+        fildPresNomUs = new JTextField();
+        fildPresNomUs.setBounds((int)225.5, (int)95.5, 265, 30);
+        fildPresNomUs.setFont(nuevaTipografia);
+        fildPresNomUs.setForeground(colorletras);
+        fildPresNomUs.setBackground(colorfondo);
+        
+        recursosver = new JButton();
+        recursosver.setBounds((int)225.5, (int)136.5,265,30);
+        recursosver.setOpaque(true);
+        recursosver.setBackground(colorfondo);
+        
+        fildPresCantidad = new JTextField();
+        fildPresCantidad.setBounds((int)225.5, (int)177.5,265,30);
+        fildPresCantidad.setFont(nuevaTipografia);
+        fildPresCantidad.setForeground(colorletras);
+        fildPresCantidad.setBackground(colorfondo);
+
+        fildPresEstado = new JTextField();
+        fildPresEstado.setBounds((int)225.5, (int)218.5,265,30);
+        fildPresEstado.setFont(nuevaTipografia);
+        fildPresEstado.setForeground(colorletras);
+        fildPresEstado.setBackground(colorfondo);
+        
+
+        jpPrestamo.add(lblCodPres);
+        jpPrestamo.add(lblIdUsuarioPres);
+        jpPrestamo.add(lblNombreCPres);
+        jpPrestamo.add(lblRecursos);
+        jpPrestamo.add(lblCantidad);
+        jpPrestamo.add(lblEstado);
+        jpPrestamo.add(fildPresCod);
+        jpPrestamo.add(fildPresIdUs);
+        jpPrestamo.add(fildPresNomUs);
+        jpPrestamo.add(recursosver);
+        jpPrestamo.add(fildPresCantidad);
+        jpPrestamo.add(fildPresEstado);
+
+
+        /*
+        private JTextField fildPresCod, fildPresIdUs, fildPresNomUs, fildPresCantidad, fildPresEstado;
+        private JButton recursosver; */
+
         //Fondo panel informacion
         imr1 = new Decolib("/img/panelDatos.png");
         imr1.setBounds(0, 0, 541, 410);
@@ -511,6 +613,9 @@ public class VentanaMain extends JFrame implements ActionListener{
             System.out.println("Botn de genero literario");
             mostralpanel(jpgnrlite);
             apartadoForm = 4;
+        } else if (event.getSource() == btnprestamo){
+            System.out.println("boton de Prestamo");
+            mostralpanel(jpPrestamo);
         }
     
     
@@ -527,6 +632,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         btnrecurso.addActionListener(listenControles);
         btnautor.addActionListener(listenControles);
         btngnrliterario.addActionListener(listenControles);
+        btnprestamo.addActionListener(listenControles);
         dropApartado.addActionListener(listenControles); 
         
     }

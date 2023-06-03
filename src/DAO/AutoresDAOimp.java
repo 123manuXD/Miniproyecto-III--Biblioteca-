@@ -27,10 +27,10 @@ public class AutoresDAOimp implements AutoresDAO, Serializable{
 
     @Override
     public boolean añadir(Autores kon) {
-        if(mapa.containsKey(kon.getCodigoAutor()))
+        if(mapa.containsKey(kon.getCodigo()))
             return false;
         
-        mapa.put(kon.getCodigoAutor(), kon);
+        mapa.put(kon.getCodigo(), kon);
         return true;
     }
 
@@ -56,12 +56,12 @@ public class AutoresDAOimp implements AutoresDAO, Serializable{
             for(Map.Entry<Integer, Autores> pareja: mapa.entrySet())
                 lista.add(pareja.getValue());
         
-        return Array.getArray(null);
+        return Array.getArray(lista);
     }
 
     @Override
     public boolean actualizar(Integer identificador, Autores kon) {
-        if(identificador.equals(kon.getCodigoAutor())){
+        if(identificador.equals(kon.getCodigo())){
             mapa.replace(identificador, kon);
             return true;
         }

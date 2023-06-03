@@ -13,7 +13,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.*;
 
-public class Usuarios implements Serializable{
+public class Usuarios implements Listable , Serializable{
     public static final long serialVersionUID = 1L;
     private static final int datosTotales = 3;
     private Integer codigo;
@@ -27,7 +27,7 @@ public class Usuarios implements Serializable{
         
     }
     // Getter
-    public Integer getCodigoUsuario(){
+    public Integer getCodigo(){
         return codigo;
     }
 
@@ -39,7 +39,7 @@ public class Usuarios implements Serializable{
         return nombre;
     }
 
-    public int getDatosTotales(){
+    public int getTotalDatos(){
         return datosTotales;
     }
     // Setter
@@ -67,4 +67,5 @@ public class Usuarios implements Serializable{
                 return "";
         }
     }
+    
 }

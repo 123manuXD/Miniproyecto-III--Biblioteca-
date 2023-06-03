@@ -1,16 +1,15 @@
 /*
- Archivo: UsuarioDAOimp.java
+ Archivo: RecursoDAOimp.java
  Proyecto III - Biblioteca univalle
- 31 de mayo de 2023
+ 03 de junio de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)
   @author Juan David Rodriguez Rubio (2025435) 
  
   Creado Unicamente con la intencion de definir la lógica del Data Access Object 
-  para los objetos de tipo autor
+  para los objetos de tipo Prestamo.
  */
-
 
 package DAO;
 
@@ -18,21 +17,20 @@ import modelo.*;
 import java.util.*;
 import java.io.Serializable;
 
-
-public class UsarioDAOimp implements UsuarioDAO, Serializable{
+public class PrestamoDAOimp implements PrestamoDAO, Serializable {
     public static final long serialVersionUID = 1L;
-    private HashMap<Integer, Usuarios> mapa;
+    private HashMap<Integer, Prestamo> mapa;
 
-    public UsarioDAOimp(){
+    public PrestamoDAOimp(){
         this.mapa = new HashMap<>();
     }
 
     @Override
-    public boolean añadir(Usuarios kon) {
+    public boolean añadir(Prestamo kon) {
         if(mapa.containsKey(kon.getCodigo()))
             return false;
         
-        mapa.put(kon.getCodigo(), kon);
+        mapa.put(kon.getCodigo(),kon);
         return true;
     }
 
@@ -44,7 +42,7 @@ public class UsarioDAOimp implements UsuarioDAO, Serializable{
     }
 
     @Override
-    public Usuarios getElemento(Integer identificador) {
+    public Prestamo getElemento(Integer identificador) {
         if(mapa.containsKey(identificador))
             return mapa.get(identificador);
         return null;
@@ -52,17 +50,17 @@ public class UsarioDAOimp implements UsuarioDAO, Serializable{
 
     @Override
     public String[][] getListables() {
-        ArrayList<Usuarios> lista = new ArrayList<>();
-        
+        ArrayList<Prestamo> lista = new ArrayList<>();
+
         if(!mapa.isEmpty())
-            for(Map.Entry<Integer, Usuarios> pareja: mapa.entrySet())
+            for(Map.Entry<Integer, Prestamo> pareja : mapa.entrySet())
                 lista.add(pareja.getValue());
-                
+        
         return Array.getArray(lista);
     }
 
     @Override
-    public boolean actualizar(Integer identificador, Usuarios kon) {
+    public boolean actualizar(Integer identificador, Prestamo kon) {
         if(identificador.equals(kon.getCodigo())){
             mapa.replace(identificador, kon);
             return true;
@@ -77,19 +75,6 @@ public class UsarioDAOimp implements UsuarioDAO, Serializable{
             return true;
         }
         return false;
-        
-    }
-
-    @Override
-    public String[][] getListaTipo(String tipoUser) {
-        ArrayList<Usuarios> lista = new ArrayList<>();
-
-        if(!mapa.isEmpty())
-            for(Map.Entry<Integer, Usuarios> pareja: mapa.entrySet())
-                if(pareja.getValue().getTipoUsuario().equals(tipoUser))
-                lista.add(pareja.getValue());
-
-        return Array.getArray(null); 
     }
     
 }

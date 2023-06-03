@@ -143,7 +143,7 @@ public class ControladorVentana {
                     ControladorGenero.pintar(ventanaMain, serialGenero);
                     if(ControladorGenero.revisarGeneroCampos(ventanaMain)){
                         Generoliterario nuevogeneroliterario = ControladorGenero.crearGeneroliterario(ventanaMain);
-                        Integer codigoGeneroLiterario = nuevogeneroliterario.getcodigogenero();
+                        Integer codigoGeneroLiterario = nuevogeneroliterario.getCodigo();
                         String nombreGeneroLiterario = nuevogeneroliterario.getgeneroliterario();
                         if(biblioteca.getGeneroLiterario().añadir(nuevogeneroliterario)){
                                 JOptionPane.showMessageDialog(null, "" + nombreGeneroLiterario + " Ha sido agregado como nuevo genero literario", "Agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
@@ -156,7 +156,7 @@ public class ControladorVentana {
                     ControladorAutores.pintar(ventanaMain, serialAutor);
                     if(ControladorAutores.revisarAutoresCampos(ventanaMain)){
                         Autores nuevoAutor = ControladorAutores.crearAutores(ventanaMain);
-                        Integer codigoAutor = nuevoAutor.getCodigoAutor();
+                        Integer codigoAutor = nuevoAutor.getCodigo();
                         String nombreAutor = nuevoAutor.getNombreAutor();
                         if(biblioteca.getAutor().añadir(nuevoAutor)){
                         JOptionPane.showMessageDialog(null, " Nuevo Autor " + "\n Codigo:" +codigoAutor + "\n Nombre|Apellido: " + nombreAutor + " \n Ha sido agregado como nuevo autor", "Agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
@@ -168,7 +168,7 @@ public class ControladorVentana {
                 } else if (apartadoFormulario == "usuarioform"){
                     if(ControladorUsarios.revisarUsarioCampos(ventanaMain)){
                         Usuarios nuevoUsuario = ControladorUsarios.crearUsuario(ventanaMain);
-                        Integer codigoUsuario = nuevoUsuario.getCodigoUsuario();
+                        Integer codigoUsuario = nuevoUsuario.getCodigo();
                         String nombreUsuario = nuevoUsuario.getNombreUsuario();
                         String tipoUsuario = nuevoUsuario.getTipoUsuario();
                         if(biblioteca.getUsuario().añadir(nuevoUsuario)){
@@ -209,7 +209,7 @@ public class ControladorVentana {
                 if(apartadoFormulario == "generoform"){
                     if(ControladorGenero.revisarGeneroCampos(ventanaMain)){
                         Generoliterario nuevGeneroliterario = ControladorGenero.crearGeneroliterario(ventanaMain);
-                        Integer idGelt = nuevGeneroliterario.getcodigogenero();
+                        Integer idGelt = nuevGeneroliterario.getCodigo();
                         String nombreGenerolt = nuevGeneroliterario.getgeneroliterario();
                         if(biblioteca.getGeneroLiterario().elementoPresente(idGelt) && biblioteca.getGeneroLiterario().actualizar(idGelt, nuevGeneroliterario)){
                             JOptionPane.showMessageDialog(null, " !Genero Literario Actualizado! " + "\n Codigo: " + idGelt + "\n Genero Literario: " + nombreGenerolt+ "", "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
@@ -220,7 +220,7 @@ public class ControladorVentana {
                 } else if (apartadoFormulario =="autoresform"){
                     if(ControladorAutores.revisarAutoresCampos(ventanaMain)){
                         Autores nuevoauAutor = ControladorAutores.crearAutores(ventanaMain);
-                        Integer idAutor = nuevoauAutor.getCodigoAutor();
+                        Integer idAutor = nuevoauAutor.getCodigo();
                         String nombreAutor = nuevoauAutor.getNombreAutor();
                         String relavanciaAutor = nuevoauAutor.getRelevancia();
                         if(biblioteca.getAutor().elementoPresente(idAutor) && biblioteca.getAutor().actualizar(idAutor, nuevoauAutor)){
@@ -233,7 +233,7 @@ public class ControladorVentana {
                 } else if (apartadoFormulario == "usuarioform"){
                     if(ControladorUsarios.revisarUsarioCampos(ventanaMain)){
                         Usuarios nuevoUsuario = ControladorUsarios.crearUsuario(ventanaMain);
-                        Integer idUsuario = nuevoUsuario.getCodigoUsuario();
+                        Integer idUsuario = nuevoUsuario.getCodigo();
                         String nombreUsuario = nuevoUsuario.getNombreUsuario();
                         if(biblioteca.getUsuario().elementoPresente(idUsuario) && biblioteca.getUsuario().actualizar(idUsuario, nuevoUsuario)){
                             JOptionPane.showMessageDialog(null, " !EL Usuario" + nombreUsuario +  " fue Actualizado! " + "\n Identificador de usario : " + idUsuario + "", "Actualizacion", JOptionPane.INFORMATION_MESSAGE);

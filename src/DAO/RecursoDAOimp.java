@@ -56,7 +56,7 @@ public class RecursoDAOimp implements RecursoDAO, Serializable {
             for(Map.Entry<Integer, Recurso> pareja: mapa.entrySet())
                 lista.add(pareja.getValue());
         
-        return Array.getArray(null);
+        return Array.getArray(lista);
     }
 
     @Override

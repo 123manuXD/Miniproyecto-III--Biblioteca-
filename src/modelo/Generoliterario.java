@@ -14,7 +14,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.*;
 
-public  class Generoliterario implements Serializable{
+public  class Generoliterario implements Listable , Serializable{
     public static final long serialVersionUID = 1L;
     private static final int datosTotales = 2;
     private Integer codigo;
@@ -26,7 +26,7 @@ public  class Generoliterario implements Serializable{
         this.genero = genero;
     }
 
-    public Integer getcodigogenero(){
+    public Integer getCodigo(){
         return codigo;
     }
 
@@ -34,7 +34,7 @@ public  class Generoliterario implements Serializable{
         return genero;
     }
 
-    public int getDatosTotales(){
+    public int getTotalDatos(){
         return datosTotales;
     }
 
@@ -57,7 +57,4 @@ public  class Generoliterario implements Serializable{
         }
     }
 
-    //BUSCAR COMO FUNCIONA JTABLE
-
-   
 }

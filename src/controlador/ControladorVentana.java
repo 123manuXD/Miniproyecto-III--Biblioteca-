@@ -1,7 +1,7 @@
 /*
  Archivo: ControladorVentana.java
  Proyecto III - Biblioteca univalle
- 28 de mayo de 2022
+ 28 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)
@@ -44,6 +44,7 @@ public class ControladorVentana {
     private Biblioteca biblioteca;
     private Integer serialGenero;
     private Integer serialAutor;
+    private Integer serialRecurso;
     
 
     public ControladorVentana(VentanaMain ventanaMain){
@@ -54,6 +55,7 @@ public class ControladorVentana {
 
         serialGenero = biblioteca.getCodSerialgrlt();
         serialAutor = biblioteca.getCodSerialAutor();
+        serialRecurso = biblioteca.getCodSerialRecurso();
         gluglu = ventanaMain.getStringtipousario();
         System.out.println(gluglu);
 
@@ -68,10 +70,54 @@ public class ControladorVentana {
 
         ventanaMain.setVisible(true);
         this.ventanaMain.addListener(new AddListener());
+        this.ventanaMain.addFocusListener(new setfocus());
         apartadoTipo = (String)ventanaMain.getApartado().getSelectedItem();
         //pintartabla(apartadoFormulario);
-        System.out.println(biblioteca.getCodSerialAutor());
-        System.out.println(biblioteca.getCodSerialgrlt());
+        
+    }
+
+    class setfocus implements FocusListener{
+
+        @Override
+        public void focusGained(FocusEvent e) {
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            // Metodo creado para llenar el Autor y genero Literario del recurso (Dependiendo de los ID)
+            if(apartadoFormulario == "recursoform"){
+                String stringIdAutor = ventanaMain.getFildRecusoAutor().getText();
+                Integer idAutor;
+                try{
+                    idAutor = Integer.valueOf(stringIdAutor);
+                } catch (NumberFormatException exception){
+                    return;
+                }
+
+                if(biblioteca.getAutor().elementoPresente(idAutor)){
+                    Autores autores = biblioteca.getAutor().getElemento(idAutor);
+                    ventanaMain.getFildRecAV().setText(autores.getNombreAutor());
+                } else {
+                    ventanaMain.getFildRecAV().setText("");
+                }
+
+                String stringIdGenLt = ventanaMain.getFildRecursoGnlt().getText();
+                Integer idGeneroLt;
+                try{
+                    idGeneroLt = Integer.valueOf(stringIdGenLt);
+                } catch (NumberFormatException exception) {
+                    return;
+                }
+
+                if(biblioteca.getGeneroLiterario().elementoPresente(idGeneroLt)){
+                    Generoliterario generoliterario = biblioteca.getGeneroLiterario().getElemento(idGeneroLt);
+                    ventanaMain.getFildRecGV().setText(generoliterario.getgeneroliterario());
+                } else {
+                    ventanaMain.getFildRecGV().setText("");
+                }
+
+            }
+        }
 
     }
 
@@ -88,6 +134,7 @@ public class ControladorVentana {
             } else if (e.getActionCommand().equals("Usuario")){
                 apartadoFormulario = "usuarioform";
             }else if (e.getActionCommand().equals("Recurso")){
+                ControladorRecurso.pintar(ventanaMain, serialRecurso);
                 apartadoFormulario = "recursoform";
             }
 
@@ -130,6 +177,19 @@ public class ControladorVentana {
                             JOptionPane.showMessageDialog(null, " EL Usuario " + "\n Codigo: " +codigoUsuario + "\n Nombre|Apellido: " + nombreUsuario + " \n Ya se encuetra en el sistema", "Advertencia", JOptionPane.INFORMATION_MESSAGE); 
                         }
                     }
+                }else if (apartadoFormulario == "recursoform"){
+                    if(ControladorRecurso.revisarRecursoCampos(ventanaMain)){
+                        Recurso nuevoRecurso = ControladorRecurso.crearRecurso(ventanaMain);
+                        Integer codigoRecurso = nuevoRecurso.getCodigo();
+                        String tituloRecurso = nuevoRecurso.getTitulo();
+                        String autorRecurso = nuevoRecurso.getAutorRecursoS();
+                        String generoRecurso = nuevoRecurso.getGeneroRecursoS();
+                        if(biblioteca.getRecurso().añadir(nuevoRecurso)){
+                            JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ha sido agregado como nuevo Recurso \n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ya se encuentra en el sistema \n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 }
                 //terminar con metodo
             } else if (e.getActionCommand().equalsIgnoreCase("limpiar")){
@@ -139,6 +199,8 @@ public class ControladorVentana {
                     ControladorAutores.limpiar(ventanaMain, serialAutor);
                 } else if (apartadoFormulario == "usuarioform"){
                     ControladorUsarios.limpiar(ventanaMain);
+                } else if (apartadoFormulario == "recursoform"){
+                    ControladorRecurso.limpiar(ventanaMain, serialRecurso);
                 }
                 
                 

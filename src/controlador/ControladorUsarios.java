@@ -1,7 +1,7 @@
 /*
  Archivo: ControladorUsuarios.java
  Proyecto III - Biblioteca univalle
- 31 de mayo de 2022
+ 31 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)
@@ -24,6 +24,15 @@ public class ControladorUsarios {
     private String apartadoUsario;
     private static String usarioEncabezado[] = {"ID usario" , " Nombre | Apellido", "Tipo Usario"};
 
+    class AddListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evento) {
+            if(evento.getActionCommand().equals("Usuario")){
+                apartadoUsario = "usarioform";
+                revisarUsarioCampos(null);
+            }
+        }
+    }
 
     public static void limpiar (VentanaMain ventanaMain){
         ventanaMain.getFildUsarioCod().setText("");
@@ -36,16 +45,6 @@ public class ControladorUsarios {
 
     public static String[] getTitlteUsario(){
         return usarioEncabezado;
-    }
-
-    class AddListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent evento) {
-            if(evento.getActionCommand().equals("Usuario")){
-                apartadoUsario = "usarioform";
-                revisarUsarioCampos(null);
-            }
-        }
     }
 
     public static boolean revisarUsarioCampos(VentanaMain ventanaMain){
@@ -86,13 +85,7 @@ public class ControladorUsarios {
         Integer idUsuario = Integer.valueOf(stringIdUsuario);
         String nombresUsario = ventanaMain.getFildUsarioNombre().getText();
         String tipoUsuario = ventanaMain.getDropUsarioTipo().getSelectedItem().toString();
-        if(tipoUsuario.equals("Estudiante")){
-            tipoUsuario = "Estudiante";
-        } else if(tipoUsuario.equals("Profesor")){
-            tipoUsuario = "Profesor";
-        }else if (tipoUsuario.equals("Administrador")){
-            tipoUsuario = "Administrador";
-        }
+        
 
         Usuarios usuario = new Usuarios(idUsuario, nombresUsario, tipoUsuario);
         return usuario;

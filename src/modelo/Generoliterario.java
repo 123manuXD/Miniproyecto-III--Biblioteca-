@@ -1,7 +1,7 @@
 /*
  Archivo: Generoliteario.java
  Proyecto III - Biblioteca univalle
- 27 de mayo de 2022
+ 27 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)

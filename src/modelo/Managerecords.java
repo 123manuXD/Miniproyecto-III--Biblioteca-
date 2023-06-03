@@ -1,7 +1,7 @@
 /*
  Archivo: Managerecords.java
  Proyecto III - Biblioteca univalle
- 28 de mayo de 2022
+ 28 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)

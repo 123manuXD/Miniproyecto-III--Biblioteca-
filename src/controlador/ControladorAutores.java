@@ -1,7 +1,7 @@
 /*
  Archivo: ControladorAutores.java
  Proyecto III - Biblioteca univalle
- 31 de mayo de 2022
+ 31 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)

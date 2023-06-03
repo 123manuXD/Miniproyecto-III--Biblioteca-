@@ -1,39 +1,37 @@
 /*
- Archivo: GnrliteraDAOimp.java
+ Archivo: RecursoDAOimp.java
  Proyecto III - Biblioteca univalle
- 27 de mayo de 2023
+ 02 de junio de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)
   @author Juan David Rodriguez Rubio (2025435) 
  
   Creado Unicamente con la intencion de definir la lógica del Data Access Object 
-  para los objetos de tipo genero literario.
+  para los objetos de tipo Recurso.
  */
-
 
 package DAO;
 
 import modelo.*;
-import java.io.Serializable;
 import java.util.*;
+import java.io.Serializable;
 
-public class GnrliteraDAOimp implements GnrliteraDAO, Serializable{
+public class RecursoDAOimp implements RecursoDAO, Serializable {
     public static final long serialVersionUID = 1L;
-    private HashMap<Integer, Generoliterario> mapa;
+    private HashMap<Integer, Recurso> mapa;
 
-    public GnrliteraDAOimp(){
+    public RecursoDAOimp(){
         this.mapa = new HashMap<>();
     }
 
     @Override
-    public boolean añadir(Generoliterario kon) {
-        if(mapa.containsKey(kon.getcodigogenero()))
+    public boolean añadir(Recurso kon) {
+        if(mapa.containsKey(kon.getCodigo()))
             return false;
         
-        mapa.put(kon.getcodigogenero(), kon);
+        mapa.put(kon.getCodigo(), kon);
         return true;
-        
     }
 
     @Override
@@ -44,7 +42,7 @@ public class GnrliteraDAOimp implements GnrliteraDAO, Serializable{
     }
 
     @Override
-    public Generoliterario getElemento(Integer identificador) {
+    public Recurso getElemento(Integer identificador) {
         if(mapa.containsKey(identificador))
             return mapa.get(identificador);
         return null;
@@ -52,19 +50,18 @@ public class GnrliteraDAOimp implements GnrliteraDAO, Serializable{
 
     @Override
     public String[][] getListables() {
-        ArrayList<Generoliterario> lista = new ArrayList<>();
+        ArrayList<Recurso> lista = new ArrayList<>();
 
         if(!mapa.isEmpty())
-            for(Map.Entry<Integer, Generoliterario> pareja: mapa.entrySet())
+            for(Map.Entry<Integer, Recurso> pareja: mapa.entrySet())
                 lista.add(pareja.getValue());
         
         return Array.getArray(null);
-
     }
 
     @Override
-    public boolean actualizar(Integer identificador, Generoliterario kon) {
-        if(identificador.equals(kon.getcodigogenero())){
+    public boolean actualizar(Integer identificador, Recurso kon) {
+        if(identificador.equals(kon.getCodigo())){
             mapa.replace(identificador, kon);
             return true;
         }
@@ -79,5 +76,5 @@ public class GnrliteraDAOimp implements GnrliteraDAO, Serializable{
         }
         return false;
     }
-
+    
 }

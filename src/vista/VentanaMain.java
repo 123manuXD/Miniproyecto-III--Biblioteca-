@@ -1,7 +1,7 @@
 /*
  Archivo: VentanaMain.java
  Proyecto III - Biblioteca univalle
- 21 de mayo de 2022
+ 21 de mayo de 2023
 
  Autores:
   @author Manuel Felipe Cardoso Forero (2027288)
@@ -40,10 +40,9 @@ public class VentanaMain extends JFrame implements ActionListener{
     private String stringtipousario;
  
     //Recurso
-    private JLabel lblcodRecurso, lbltituloRecurso, lblejemplarR, lblRectipo, lblRecAutor, lblRecGenlt;
-    private JTextField fildRecursoCod, fildRecursoTitle, fildRecursoEjemp, fildRecusoAutor, fildRecursoGnlt;
+    private JLabel lblcodRecurso, lbltituloRecurso, lblRecDate, lblRectipo, lblRecAutor, lblRecGenlt, lblRecAutordato, lblRecGenDato;
+    private JTextField fildRecursoCod, fildRecursoTitle, fildRecursoDate, fildRecusoAutor, fildRecursoGnlt, fildRecUV, fildRecGV;
    
-
     private String[] tipoRecurso = {"Seleccionar","Libro","Revista"};
     private JComboBox<String> dropRecursoTipo = new JComboBox<>(tipoRecurso);
 
@@ -174,7 +173,7 @@ public class VentanaMain extends JFrame implements ActionListener{
 
         jpInformacion = new JPanel();
         jpInformacion.setLayout(null);
-        jpInformacion.setBounds((int)605.5, (int)88.5, 541, 350); //138.5
+        jpInformacion.setBounds((int)605.5, (int)38.5, 541, 410); //138.5
         jpInformacion.setBackground(new Color(0, 0, 0,0));
         jpPrincipal.add(jpInformacion);
 
@@ -230,14 +229,14 @@ public class VentanaMain extends JFrame implements ActionListener{
         */
 
         jprplace = new JPanel();
-        jprplace.setBounds(7, 59, 523, 282); //172
+        jprplace.setBounds(7, 59, 523, 338); //172
         jprplace.setLayout(null);
         jprplace.setBackground(colorfondo);
         jpInformacion.add(jprplace);
 
         // Panel para añadir todo lo correspondiente a el usario
         jpuser = new JPanel();
-        jpuser.setBounds(0, 0, 523, 279);
+        jpuser.setBounds(0, 0, 523, 338 );
         jpuser.setLayout(null);
         jpuser.setBackground(colorfondo);
 
@@ -284,7 +283,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         // Panel para añadir todo lo correspondiente al recurso
         
         jprecur = new JPanel();
-        jprecur.setBounds(0, 0, 523, 279);
+        jprecur.setBounds(0, 0, 523, 338);
         jprecur.setLayout(null);
         jprecur.setBackground(colorfondo);
 
@@ -298,10 +297,10 @@ public class VentanaMain extends JFrame implements ActionListener{
         lbltituloRecurso.setFont(nuevaTipografia);
         lbltituloRecurso.setForeground(colorletras);
 
-        lblejemplarR = new JLabel("Ejemplares:");
-        lblejemplarR.setBounds((int)29.5, (int)95.5, 185, 30);
-        lblejemplarR.setFont(nuevaTipografia);
-        lblejemplarR.setForeground(colorletras);
+        lblRecDate = new JLabel("Fecha Registro");
+        lblRecDate.setBounds((int)29.5, (int)95.5, 185, 30);
+        lblRecDate.setFont(nuevaTipografia);
+        lblRecDate.setForeground(colorletras);
 
         lblRectipo = new JLabel("Tipo Recurso:");
         lblRectipo.setBounds((int)29.5, (int)136.5, 185, 30);
@@ -318,6 +317,16 @@ public class VentanaMain extends JFrame implements ActionListener{
         lblRecGenlt.setFont(nuevaTipografia);
         lblRecGenlt.setForeground(colorletras);
 
+        lblRecAutordato = new JLabel("Autor:");
+        lblRecAutordato.setBounds((int)29.5, (int)259.5, 185, 30);
+        lblRecAutordato.setFont(nuevaTipografia);
+        lblRecAutordato.setForeground(colorletras);
+
+        lblRecGenDato = new JLabel("Gnero|Literario");
+        lblRecGenDato.setBounds((int)29.5, (int)300.5, 185, 30);
+        lblRecGenDato.setFont(nuevaTipografia);
+        lblRecGenDato.setForeground(colorletras);
+
         fildRecursoCod = new JTextField();
         fildRecursoCod.setBounds((int)225.5, (int)13.5, 265, 30);
         fildRecursoCod.setFont(nuevaTipografia);
@@ -330,11 +339,12 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildRecursoTitle.setForeground(colorletras);
         fildRecursoTitle.setBackground(colorfondo);
 
-        fildRecursoEjemp = new JTextField();
-        fildRecursoEjemp.setBounds((int)225.5, (int)95.5, 265, 30);
-        fildRecursoEjemp.setFont(nuevaTipografia);
-        fildRecursoEjemp.setForeground(colorletras);
-        fildRecursoEjemp.setBackground(colorfondo);
+        fildRecursoDate = new JTextField();
+        fildRecursoDate.setBounds((int)225.5, (int)95.5, 265, 30);
+        fildRecursoDate.setFont(nuevaTipografia);
+        fildRecursoDate.setForeground(colorletras);
+        fildRecursoDate.setBackground(colorfondo);
+        fildRecursoDate.setEditable(false);
 
         dropRecursoTipo.setBounds((int)225.5, (int)136.5,265,30);
         dropRecursoTipo.setOpaque(true);
@@ -354,22 +364,40 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildRecursoGnlt.setForeground(colorletras);
         fildRecursoGnlt.setBackground(colorfondo);
 
+        fildRecUV = new JTextField();
+        fildRecUV.setBounds((int)225.5, (int)259.5 ,265,30);
+        fildRecUV.setFont(nuevaTipografia);
+        fildRecUV.setForeground(colorletras);
+        fildRecUV.setBackground(colorfondo);
+        fildRecUV.setEditable(false);
+
+        fildRecGV = new JTextField();
+        fildRecGV.setBounds((int)225.5, (int)300.5 ,265,30);
+        fildRecGV.setFont(nuevaTipografia);
+        fildRecGV.setForeground(colorletras);
+        fildRecGV.setBackground(colorfondo);
+        fildRecGV.setEditable(false);
+
         jprecur.add(lblcodRecurso);
         jprecur.add(lbltituloRecurso);
-        jprecur.add(lblejemplarR);
+        jprecur.add(lblRecDate);
         jprecur.add(lblRectipo);
         jprecur.add(lblRecAutor);
         jprecur.add(lblRecGenlt);
+        jprecur.add(lblRecAutordato);
+        jprecur.add(lblRecGenDato);
         jprecur.add(fildRecursoCod);
         jprecur.add(fildRecursoTitle);
-        jprecur.add(fildRecursoEjemp);
+        jprecur.add(fildRecursoDate);
         jprecur.add(dropRecursoTipo);
         jprecur.add(fildRecusoAutor);
         jprecur.add(fildRecursoGnlt);
+        jprecur.add(fildRecUV);
+        jprecur.add(fildRecGV);
 
         // Panel para añadir todo lo correspondiente a el autor
         jpautor = new JPanel();
-        jpautor.setBounds(0, 0, 523, 279);
+        jpautor.setBounds(0, 0, 523, 338);
         jpautor.setLayout(null);
         jpautor.setBackground(colorfondo);
 
@@ -415,7 +443,7 @@ public class VentanaMain extends JFrame implements ActionListener{
 
         // Panel para añadir todo lo correspondiente a el genero literario
         jpgnrlite = new JPanel();
-        jpgnrlite.setBounds(0, 0, 523, 279);
+        jpgnrlite.setBounds(0, 0, 523, 338);
         jpgnrlite.setLayout(null);
         jpgnrlite.setBackground(new Color(232, 246, 239));
 
@@ -449,7 +477,7 @@ public class VentanaMain extends JFrame implements ActionListener{
 
         //Fondo panel informacion
         imr1 = new Decolib("/img/panelDatos.png");
-        imr1.setBounds(0, 0, 541, 350);
+        imr1.setBounds(0, 0, 541, 410);
         jpInformacion.add(imr1);
 
         //Fondo del panel princicipal
@@ -503,6 +531,11 @@ public class VentanaMain extends JFrame implements ActionListener{
         
     }
 
+    public void addFocusListener(FocusListener listener){
+        fildRecusoAutor.addFocusListener(listener);
+        fildRecursoGnlt.addFocusListener(listener);
+    }
+
     private void mostralpanel(JPanel show){
         jprplace.removeAll();
         jprplace.add(show);
@@ -518,8 +551,8 @@ public class VentanaMain extends JFrame implements ActionListener{
         return fildRecursoTitle;
     }
 
-    public JTextField getFildRecursoEjemp() {
-        return fildRecursoEjemp;
+    public JTextField getFildRecursoDate() {
+        return fildRecursoDate;
     }
 
     public JTextField getFildRecusoAutor() {
@@ -528,6 +561,14 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     public JTextField getFildRecursoGnlt() {
         return fildRecursoGnlt;
+    }
+
+    public JTextField getFildRecAV() {
+        return fildRecUV;
+    }
+
+    public JTextField getFildRecGV() {
+        return fildRecGV;
     }
 
     public JComboBox<String> getDropRecursoTipo() {

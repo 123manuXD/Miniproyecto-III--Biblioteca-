@@ -22,6 +22,9 @@ import javax.swing.tree.FixedHeightLayoutCache;
 
 public class VentanaMain extends JFrame implements ActionListener{
 
+    private String[] opcionesApartado = {"Selecione el Apartado","Usuarios", "Recursos", "Autores", "Genero|literario", "Prestamo"};
+    private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
+    Integer apartadoForm = 0;
     private JTable DatosEnTabla = new JTable();
     private JScrollPane Paneltable = new JScrollPane();
     private JPanel jpLista, jpconTablas, jpInformacion, jpPrincipal, jprplace, jpuser, jprecur, jpautor, jpgnrlite, jpPrestamo;
@@ -55,17 +58,11 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JLabel lblcodGen, lblGenname;
     private JTextField filedcodg, fieldnameg;
 
-    private String[] opcionesApartado = {"Selecione EL Apartado","Usuarios", "Recursos", "Autores", "Genero literario", "Prestamo"};
-    private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
-
-    private Integer apartadoForm = 0;
-
     // ------------ PARA EL PRESTAMO ------------------ 
     private JLabel lblCodPres , lblIdUsuarioPres, lblNombreCPres, lblRecursos, lblCantidad ,lblEstado;
     private JTextField fildPresCod, fildPresIdUs, fildPresNomUs, fildPresCantidad, fildPresEstado;
     private JButton recursosver;
     
-
     public VentanaMain (){
         iniciarComponentes();
         im1 = new Decolib("/img/Fondo2.png");
@@ -85,12 +82,13 @@ public class VentanaMain extends JFrame implements ActionListener{
         setResizable(false);
         setLayout(null);
 
+       
+
         //Fuente usada por los txt y los labels
         Font nuevaTipografia = new Font("Courier New", Font.BOLD, 20);
         Font nuevaTipografia2 = new Font("Courier New", Font.BOLD, 55);
         Font nuevaTipografia3 = new Font("Courier New", Font.BOLD, 47);
         Color colorletras = new Color(74,39,23);
-
         //Color de fondo
         Color colorfondo = new Color(232, 246, 239);
 
@@ -234,7 +232,6 @@ public class VentanaMain extends JFrame implements ActionListener{
         btnautor.addActionListener(this);
         btngnrliterario.addActionListener(this);
         btnprestamo.addActionListener(this);
-        dropApartado.addActionListener(this); 
 
         /* 
          * Voy a crear un apartado donde creare un panel base para poder remplazar, en otros subpaneles
@@ -542,10 +539,12 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildPresNomUs.setForeground(colorletras);
         fildPresNomUs.setBackground(colorfondo);
         
-        recursosver = new JButton();
+        recursosver = new JButton("Listar Productos");
         recursosver.setBounds((int)225.5, (int)136.5,265,30);
         recursosver.setOpaque(true);
         recursosver.setBackground(colorfondo);
+        recursosver.setFont(nuevaTipografia);
+        recursosver.setForeground(colorletras);
         
         fildPresCantidad = new JTextField();
         fildPresCantidad.setBounds((int)225.5, (int)177.5,265,30);
@@ -601,19 +600,15 @@ public class VentanaMain extends JFrame implements ActionListener{
         if(event.getSource() == btnusario){
             System.out.println("Botn de usario");
             mostralpanel(jpuser);
-            apartadoForm = 1;
         }else if (event.getSource() == btnautor){
             System.out.println("Botn de autor");
             mostralpanel(jpautor);
-            apartadoForm = 2;
         }else if (event.getSource() == btnrecurso){
             System.out.println("Botn de recurso");
             mostralpanel(jprecur);
-            apartadoForm = 3;
         }else if (event.getSource() == btngnrliterario){
             System.out.println("Botn de genero literario");
             mostralpanel(jpgnrlite);
-            apartadoForm = 4;
         } else if (event.getSource() == btnprestamo){
             System.out.println("boton de Prestamo");
             mostralpanel(jpPrestamo);
@@ -634,6 +629,8 @@ public class VentanaMain extends JFrame implements ActionListener{
         btnautor.addActionListener(listenControles);
         btngnrliterario.addActionListener(listenControles);
         btnprestamo.addActionListener(listenControles);
+        recursosver.addActionListener(listenControles);
+        dropUsarioTipo.addActionListener(listenControles);
         
     }
 
@@ -755,6 +752,11 @@ public class VentanaMain extends JFrame implements ActionListener{
     public JTextField getFildPresEstado() {
         return fildPresEstado;
     }
+
+    public JButton getRecursosver() {
+        return recursosver;
+    }
+
     
     /*------------ PARA LOS DEMAS ELEMENTOS  -------------------*/
 
@@ -785,10 +787,6 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     public JComboBox<String> getApartado() {
         return dropApartado;
-    }
-
-    public void setDropApartado(JComboBox<String> dropApartado) {
-        this.dropApartado = dropApartado;
     }
 
 }

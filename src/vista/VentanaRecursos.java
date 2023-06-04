@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.stream.FileCacheImageInputStream;
 import javax.swing.*;
+import javax.swing.plaf.TextUI;
 import javax.swing.tree.FixedHeightLayoutCache;
 
 import java.time.LocalDate;
@@ -43,14 +44,11 @@ public class VentanaRecursos extends JFrame {
 
     private void iniciarComponentes(){
         //Config JFRAME
-        setTitle("Biblioteca Univalle (Panel de Recursos)");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1196, 486);
         setLocationRelativeTo(null);
-        setVisible(true);
         setResizable(false);
-        setLayout(null);
 
+        
         /*-------------------- FUENTES Y COLORES ---------------------------------- */
         Font nuevaTipografia1 = new Font("Courier New", Font.BOLD, 25);
         Color colorletrasfont = new Color(74,39,23);
@@ -196,6 +194,11 @@ public class VentanaRecursos extends JFrame {
         imb3 = new Decolib("/img/botones/btneliminar.png");
         imb3.setBounds(0,0,232,67);
         btndelete.add(imb3);
+    }
+
+    public void mostrarventana(){
+        setTitle("|BIBLIOTECA| Apartado de recursos a prestar");
+        setVisible(true);
     }
 
     public void addListener(ActionListener listenControles){

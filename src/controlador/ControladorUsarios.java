@@ -84,11 +84,21 @@ public class ControladorUsarios {
         String stringIdUsuario = ventanaMain.getFildUsarioCod().getText();
         Integer idUsuario = Integer.valueOf(stringIdUsuario);
         String nombresUsario = ventanaMain.getFildUsarioNombre().getText();
-        String tipoUsuario = ventanaMain.getDropUsarioTipo().getSelectedItem().toString();
+        String tipoUsuario = (String)ventanaMain.getDropUsarioTipo().getSelectedItem();
         
 
         Usuarios usuario = new Usuarios(idUsuario, nombresUsario, tipoUsuario);
         return usuario;
+    }
+
+    public static void crearTabla(DefaultTableModel modelTlabe, VentanaMain ventanaMain){
+        String tablaIdusario = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),0).toString();
+        String tablaUsuario = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),1).toString();
+        String tablaTipoUsuario = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),2).toString();
+
+        ventanaMain.getFildUsarioCod().setText(tablaIdusario);
+        ventanaMain.getFildUsarioNombre().setText(tablaUsuario);
+        ventanaMain.getDropUsarioTipo().setSelectedItem(tablaTipoUsuario);
     }
     
 }

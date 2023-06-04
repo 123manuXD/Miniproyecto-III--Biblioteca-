@@ -20,22 +20,19 @@ package controlador;
 import DAO.*;
 import modelo.*;
 import vista.*;
+
 import java.awt.event.*;
 import java.math.*;
-
-import javax.management.ValueExp;
-import javax.print.attribute.SetOfIntegerSyntax;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
-import javax.xml.transform.Source;
-
 import java.util.*;
 import java.awt.*;
 
+
 public class ControladorVentana {
+    private VentanaRecursos ventanaRecursos = new VentanaRecursos();
     private String apartadoTipo;
-    private String gluglu;
     private String apartadoFormulario;
     private VentanaMain ventanaMain;
     private JTable datosTable = new JTable();
@@ -45,6 +42,10 @@ public class ControladorVentana {
     private Integer serialGenero;
     private Integer serialAutor;
     private Integer serialRecurso;
+    private Integer serialPrestamo;
+    Font nuevaTipografia = new Font("Courier New", Font.BOLD, 15);
+    Color colorletras = new Color(74,39,23);
+    Color colorfondo = new Color(232, 246, 239);
     
 
     public ControladorVentana(VentanaMain ventanaMain){
@@ -52,17 +53,18 @@ public class ControladorVentana {
         //this.biblioteca = Managerecords.leerArchivoBin(rutaArchivoBin);
         if(biblioteca == null)
         biblioteca = new Biblioteca("Biblioteca Universidad del Valle");
-
         serialGenero = biblioteca.getCodSerialgrlt();
         serialAutor = biblioteca.getCodSerialAutor();
         serialRecurso = biblioteca.getCodSerialRecurso();
-        gluglu = ventanaMain.getStringtipousario();
-        System.out.println(gluglu);
+        serialPrestamo = biblioteca.getCodSerialPrestamo();
 
         ventanaMain.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent){
                 biblioteca.setCodSerialgrlt(serialGenero);
+                biblioteca.setCodSerialAutor(serialAutor);
+                biblioteca.setCodSerialRecurso(serialRecurso);
+                biblioteca.setCodSerialPrestamo(serialPrestamo);
                 Managerecords.guardarArchivoBin(biblioteca, rutaArchivoBin);
                 System.exit(0);
             }
@@ -71,8 +73,10 @@ public class ControladorVentana {
         ventanaMain.setVisible(true);
         this.ventanaMain.addListener(new AddListener());
         this.ventanaMain.addFocusListener(new setfocus());
+        ventanaRecursos.addListener(new AddListener());
+        ventanaRecursos.addFocusListener(new setfocus());
         apartadoTipo = (String)ventanaMain.getApartado().getSelectedItem();
-        //pintartabla(apartadoFormulario);
+        pintartabla(apartadoFormulario);
         
     }
 
@@ -136,8 +140,14 @@ public class ControladorVentana {
             }else if (e.getActionCommand().equals("Recurso")){
                 ControladorRecurso.pintar(ventanaMain, serialRecurso);
                 apartadoFormulario = "recursoform";
-            }
-
+            } else if (e.getActionCommand().equals("Listar Productos")){
+                pintarListadoo(apartadoFormulario);
+            } else if (e.getActionCommand().equals("Pre")){
+                ControladorPrestamo.pintar(ventanaMain, serialPrestamo);
+                apartadoFormulario = "prestamoform";
+            } //else if (e.getSource() == ventanaMain.getApartado().getSelectedItem())
+        
+            
             if(e.getActionCommand().equalsIgnoreCase("Agregar")){
                 if(apartadoFormulario == "generoform"){
                     ControladorGenero.pintar(ventanaMain, serialGenero);
@@ -191,6 +201,10 @@ public class ControladorVentana {
                             JOptionPane.showMessageDialog(null, "El recurso " + tituloRecurso + "\n Ya se encuentra en el sistema \n Codigo:" + codigoRecurso + "\n Autor: " + autorRecurso + "\n Genero Literaio: "+ generoRecurso + "", "Recurso agregado correctamente", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
+                }else if (apartadoFormulario == "prestamoform"){
+                    if(ControladorPrestamo.revisarPrestamoCampos(ventanaMain)){
+                        Integer idUsuario = Integer.valueOf(ventanaMain.getFildPresIdUs().getText());
+                    }
                 }
                 //terminar con metodo
             } else if (e.getActionCommand().equalsIgnoreCase("limpiar")){
@@ -202,6 +216,8 @@ public class ControladorVentana {
                     ControladorUsarios.limpiar(ventanaMain);
                 } else if (apartadoFormulario == "recursoform"){
                     ControladorRecurso.limpiar(ventanaMain, serialRecurso);
+                } else if (apartadoFormulario == "prestamoform"){
+                    ControladorPrestamo.limpiar(ventanaMain, serialPrestamo);
                 }
                 
                 
@@ -321,19 +337,47 @@ public class ControladorVentana {
           
     }
 
-    public void pintartabla(String apartadoTipo){
+    public void pintarListadoo(String apartadoFormulario){
+        datosTable = ventanaRecursos.getTablaDatosPrestamo();
+        paneltabla = ventanaRecursos.getPanelTabla();
+
+        paneltabla.removeAll();
+        datosTable.removeAll();
+
+        if(apartadoFormulario == "Pre"){
+            String[][] datoslistados = Array.getArrayRecursos(biblioteca, null);
+            datosTable = new JTable(ControladorVentana.asignarModelTabla(datoslistados, ControladorListaRecursos.getTitleListaRecursos()));
+            datosTable.setFont(nuevaTipografia);
+        }
+
+        ventanaRecursos.setTablaDatosPrestamo(datosTable);
+        paneltabla = new JScrollPane(ventanaRecursos.getTablaDatosPrestamo());
+        ventanaRecursos.setPanelTabla(paneltabla);
+
+        datosTable.addMouseListener(new test());
+        ventanaRecursos.mostrarventana();
+    }
+
+    public void pintartabla(String apartadoFormulario){
         datosTable = ventanaMain.getDatosEnTabla();
         paneltabla = ventanaMain.getPaneltable();
         paneltabla.removeAll();
         datosTable.removeAll();
 
-        if(apartadoTipo == "Genero literario"){
+        if(apartadoFormulario.equals("generoform")){
+           
             String[][] generoLiterarioData = biblioteca.getGeneroLiterario().getListables();
             datosTable = new JTable(ControladorVentana.asignarModelTabla(generoLiterarioData, ControladorGenero.getTitleGenero()));
-
             ventanaMain.setDatosEnTabla(datosTable);
             paneltabla = new JScrollPane(ventanaMain.getDatosEnTabla());
-            ventanaMain.setPaneltable(paneltabla); 
+            ventanaMain.setPaneltable(paneltabla);
+            
+
+        } else if (apartadoFormulario.equals("usuarioform")){
+            String[][] usuarioDato = biblioteca.getUsuario().getListables();
+            datosTable = new JTable(ControladorVentana.asignarModelTabla(usuarioDato, ControladorUsarios.getTitlteUsario()));
+            ventanaMain.setDatosEnTabla(datosTable);
+            paneltabla = new JScrollPane(ventanaMain.getDatosEnTabla());
 
         }
 
@@ -346,8 +390,11 @@ public class ControladorVentana {
         public void mouseClicked(MouseEvent e) {
             DefaultTableModel tableModel= (DefaultTableModel)ventanaMain.getDatosEnTabla().getModel();
 
-            if(apartadoTipo == "Genero literario"){
+            if(apartadoFormulario == "generoform"){
                 ControladorGenero.crearTabla(tableModel, ventanaMain);
+
+            } else if(apartadoFormulario == "usuarioform"){
+                ControladorUsarios.crearTabla(tableModel, ventanaMain);
             }
         
         }

@@ -100,6 +100,21 @@ public class ControladorPrestamo {
         Prestamo prestamo = new Prestamo(idPrestamo, idUserPrestamo, userNombrePr, listaRecursos, cantidad, estado);
         return prestamo;
     }
+
+    public static void crearTabla(DefaultTableModel modelTlabe, VentanaMain ventanaMain){
+        String tablaidPrestamo = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),0).toString();
+        String tablausuarioIDPrestamo = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),1).toString();
+        String tablausuarioPrestamo = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),2).toString();
+        String tablacantidad = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),3).toString();
+        String tablaestado = modelTlabe.getValueAt(ventanaMain.getDatosEnTabla().getSelectedRow(),4).toString();
+
+        ventanaMain.getFildPresCod().setText(tablaidPrestamo);
+        ventanaMain.getFildPresIdUs().setText(tablausuarioIDPrestamo);
+        ventanaMain.getFildPresNomUs().setText(tablausuarioPrestamo);
+        ventanaMain.getFildPresCantidad().setText(tablacantidad);
+        ventanaMain.getFildPresEstado().setText(tablaestado);
+    }
+
         
 }
  

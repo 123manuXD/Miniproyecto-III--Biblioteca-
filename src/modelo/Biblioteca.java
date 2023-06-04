@@ -24,9 +24,13 @@ public class Biblioteca implements Serializable{
     private AutoresDAO autor;
     private UsuarioDAO usuario;
     private RecursoDAO recurso;
+    private PrestamoDAO prestamo;
     private Integer codInteger = 1040780;
     private Integer codSerialgrlt = 6500;
     private Integer codSerialRecurso = 8767890;
+    private Integer codSerialPrestamo = 32479435;
+
+    
 
     public Biblioteca(String nombreBiblioteca){
         this.nombreBiblioteca = nombreBiblioteca;
@@ -34,6 +38,7 @@ public class Biblioteca implements Serializable{
         this.autor = new AutoresDAOimp();
         this.usuario = new UsarioDAOimp();
         this.recurso = new RecursoDAOimp();
+        this.prestamo = new PrestamoDAOimp();
 
             
     }
@@ -78,6 +83,14 @@ public class Biblioteca implements Serializable{
         this.recurso = recurso;
     }
 
+    public PrestamoDAO getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(PrestamoDAO prestamo) {
+        this.prestamo = prestamo;
+    }
+
     public Integer getCodSerialgrlt() {
         return codSerialgrlt;
     }
@@ -86,6 +99,13 @@ public class Biblioteca implements Serializable{
         return codInteger;
     }
 
+    public Integer getCodSerialRecurso() {
+        return codSerialRecurso;
+    }
+
+    public Integer getCodSerialPrestamo() {
+        return codSerialPrestamo;
+    }
 
     public void setCodSerialgrlt(Integer codSerialgrlt) {
         this.codSerialgrlt = codSerialgrlt;
@@ -95,12 +115,12 @@ public class Biblioteca implements Serializable{
         this.codInteger = codSerialAutor;
     }
 
-    public Integer getCodSerialRecurso() {
-        return codSerialRecurso;
-    }
-
     public void setCodSerialRecurso(Integer codSerialRecurso) {
         this.codSerialRecurso = codSerialRecurso;
+    }
+
+    public void setCodSerialPrestamo(Integer codSerialPrestamo) {
+        this.codSerialPrestamo = codSerialPrestamo;
     }
 
     public void sumarcodserialgrlt(){
@@ -113,6 +133,10 @@ public class Biblioteca implements Serializable{
 
     public void sumarcodSerialRecurso(){
         codSerialRecurso++;
+    }
+
+    public void sumarcodSerialPrestamo(){
+        codSerialPrestamo++;
     }
     
 }

@@ -37,6 +37,7 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JTextField fildUsarioCod, fildUsarioNombre;
     private String[] tipoUsuario = {"Seleccionar","Estudiante","Profesor","Administrador"};
     private JComboBox<String> dropUsarioTipo = new JComboBox<>(tipoUsuario);
+    //validar cada campo con un numero
     private String stringtipousario;
  
     //  ------------ PARA EL RECURSO ------------------ 
@@ -633,13 +634,13 @@ public class VentanaMain extends JFrame implements ActionListener{
         btnautor.addActionListener(listenControles);
         btngnrliterario.addActionListener(listenControles);
         btnprestamo.addActionListener(listenControles);
-        dropApartado.addActionListener(listenControles); 
         
     }
 
     public void addFocusListener(FocusListener listener){
         fildRecusoAutor.addFocusListener(listener);
         fildRecursoGnlt.addFocusListener(listener);
+        fildPresIdUs.addFocusListener(listener);
     }
 
     private void mostralpanel(JPanel show){
@@ -731,6 +732,28 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     public JTextField getFieldnameg() {
         return fieldnameg;
+    }
+
+    /*------------ PARA Prestamo Getters) -------------------*/
+    
+    public JTextField getFildPresCod() {
+        return fildPresCod;
+    }
+
+    public JTextField getFildPresIdUs() {
+        return fildPresIdUs;
+    }
+
+    public JTextField getFildPresNomUs() {
+        return fildPresNomUs;
+    }
+
+    public JTextField getFildPresCantidad() {
+        return fildPresCantidad;
+    }
+
+    public JTextField getFildPresEstado() {
+        return fildPresEstado;
     }
     
     /*------------ PARA LOS DEMAS ELEMENTOS  -------------------*/

@@ -198,6 +198,17 @@ public class VentanaRecursos extends JFrame {
         btndelete.add(imb3);
     }
 
+    public void addListener(ActionListener listenControles){
+        btnadd.addActionListener(listenControles);
+        btnclean.addActionListener(listenControles);
+        btndelete.addActionListener(listenControles);
+        
+    }
+
+    public void addFocusListener(FocusListener listener){
+        fildPrestamoRecurso.addFocusListener(listener);
+    }
+
     /*------------ JTextFidls (Getters) -------------------*/
     public JTextField getFildPrestamoIDRecurso() {
         return fildPrestamoIDRecurso;

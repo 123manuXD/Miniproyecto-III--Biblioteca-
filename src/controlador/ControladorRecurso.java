@@ -28,7 +28,7 @@ import javax.swing.table.*;
 public class ControladorRecurso {
     private String apartadoRecurso;
     private static String recursoEncabezado[] = {"ID recurso", "Titulo", "Fecha Registro","Tipo Recurso","ID Recurso Autor", "ID Recurso Genero", "AUtor", "Genero"};
-
+  
 
     class AddListener implements ActionListener{
         @Override
@@ -77,7 +77,7 @@ public class ControladorRecurso {
         try {
             Integer.valueOf(RecursoAutorID);
         } catch (NumberFormatException exception){
-            JOptionPane.showMessageDialog(null, "Porfavor Ingrese un ID valido de autor sin punto ni comas" + "\n Ejemplo: 1040780" , "Advertencia", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Porfavor Ingrese un ID valido de autor sin puntos ni comas" + "\n Ejemplo: 1040780" , "Advertencia", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 

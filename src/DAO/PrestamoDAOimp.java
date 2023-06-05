@@ -1,5 +1,5 @@
 /*
- Archivo: RecursoDAOimp.java
+ Archivo: PrestamoDAOimp.java
  Proyecto III - Biblioteca univalle
  03 de junio de 2023
 

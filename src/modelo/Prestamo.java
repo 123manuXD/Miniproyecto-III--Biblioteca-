@@ -1,5 +1,5 @@
 /*
- Archivo: Recurso.java
+ Archivo: Prestamo.java
  Proyecto III - Biblioteca univalle
  03 de Junio de 2023
 

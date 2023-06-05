@@ -1,5 +1,5 @@
 /*
- Archivo: Controlergnltr.java
+ Archivo: ControladorRecurso.java
  Proyecto III - Biblioteca univalle
  02 de junio de 2023
 

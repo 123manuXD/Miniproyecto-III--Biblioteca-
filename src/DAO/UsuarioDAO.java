@@ -1,5 +1,5 @@
 /*
- Archivo: GnrliteraDAOimp.java
+ Archivo: UsuarioDAO.java
  Proyecto III - Biblioteca univalle
  31 de mayo de 2023
 

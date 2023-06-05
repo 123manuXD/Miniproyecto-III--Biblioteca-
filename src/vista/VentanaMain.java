@@ -47,7 +47,7 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JLabel lblcodRecurso, lbltituloRecurso, lblRecDate, lblRectipo, lblRecAutor, lblRecGenlt, lblRecAutordato, lblRecGenDato;
     private JTextField fildRecursoCod, fildRecursoTitle, fildRecursoDate, fildRecusoAutor, fildRecursoGnlt, fildRecUV, fildRecGV;
    
-    private String[] tipoRecurso = {"Seleccionar","Libro","Revista"};
+    private String[] tipoRecurso = {"Seleccionar","Libro","Revista","Articulo","Comic","Manga"};
     private JComboBox<String> dropRecursoTipo = new JComboBox<>(tipoRecurso);
 
     //  ------------ PARA EL AUTOR ------------------ 
@@ -62,6 +62,10 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JLabel lblCodPres , lblIdUsuarioPres, lblNombreCPres, lblRecursos, lblCantidad ,lblEstado;
     private JTextField fildPresCod, fildPresIdUs, fildPresNomUs, fildPresCantidad, fildPresEstado;
     private JButton recursosver;
+
+    private String[] estadoPrestamo = {"Seleccionar","Abierto","Parialemente Cerrado","Cerrado"};
+    private JComboBox<String> dropEstado = new JComboBox<>(estadoPrestamo);
+    
     
     public VentanaMain (){
         iniciarComponentes();
@@ -342,6 +346,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildRecursoCod.setFont(nuevaTipografia);
         fildRecursoCod.setForeground(colorletras);
         fildRecursoCod.setBackground(colorfondo);
+        fildRecursoCod.setEditable(false);
 
         fildRecursoTitle = new JTextField();
         fildRecursoTitle.setBounds((int)225.5, (int)54.5, 265, 30);
@@ -431,6 +436,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildAutorcod.setFont(nuevaTipografia);
         fildAutorcod.setForeground(colorletras);
         fildAutorcod.setBackground(colorfondo);
+        fildAutorcod.setEditable(false);
 
         fildAutorname = new JTextField();
         fildAutorname.setBounds((int)225.5, (int)54.5, 265, 30);
@@ -526,6 +532,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildPresCod.setFont(nuevaTipografia);
         fildPresCod.setForeground(colorletras);
         fildPresCod.setBackground(colorfondo);
+        fildPresCod.setEditable(false);
 
         fildPresIdUs = new JTextField();
         fildPresIdUs.setBounds((int)225.5, (int)54.5, 265, 30);
@@ -538,6 +545,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildPresNomUs.setFont(nuevaTipografia);
         fildPresNomUs.setForeground(colorletras);
         fildPresNomUs.setBackground(colorfondo);
+        fildPresNomUs.setEditable(false);
         
         recursosver = new JButton("Listar Productos");
         recursosver.setBounds((int)225.5, (int)136.5,265,30);
@@ -552,11 +560,10 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildPresCantidad.setForeground(colorletras);
         fildPresCantidad.setBackground(colorfondo);
 
-        fildPresEstado = new JTextField();
-        fildPresEstado.setBounds((int)225.5, (int)218.5,265,30);
-        fildPresEstado.setFont(nuevaTipografia);
-        fildPresEstado.setForeground(colorletras);
-        fildPresEstado.setBackground(colorfondo);
+        dropEstado.setBounds((int)225.5, (int)218.5,265,30);
+        dropEstado.setFont(nuevaTipografia);
+        dropEstado.setForeground(colorletras);
+        dropEstado.setBackground(colorfondo);
         
 
         jpPrestamo.add(lblCodPres);
@@ -570,12 +577,8 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpPrestamo.add(fildPresNomUs);
         jpPrestamo.add(recursosver);
         jpPrestamo.add(fildPresCantidad);
-        jpPrestamo.add(fildPresEstado);
+        jpPrestamo.add(dropEstado);
 
-
-        /*
-        private JTextField fildPresCod, fildPresIdUs, fildPresNomUs, fildPresCantidad, fildPresEstado;
-        private JButton recursosver; */
 
         //Fondo panel informacion
         imr1 = new Decolib("/img/panelDatos.png");
@@ -630,7 +633,6 @@ public class VentanaMain extends JFrame implements ActionListener{
         btngnrliterario.addActionListener(listenControles);
         btnprestamo.addActionListener(listenControles);
         recursosver.addActionListener(listenControles);
-        dropUsarioTipo.addActionListener(listenControles);
         
     }
 
@@ -749,9 +751,10 @@ public class VentanaMain extends JFrame implements ActionListener{
         return fildPresCantidad;
     }
 
-    public JTextField getFildPresEstado() {
-        return fildPresEstado;
+    public JComboBox<String> getDropEstado() {
+        return dropEstado;
     }
+
 
     public JButton getRecursosver() {
         return recursosver;

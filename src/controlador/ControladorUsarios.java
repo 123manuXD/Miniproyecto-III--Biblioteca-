@@ -36,9 +36,7 @@ public class ControladorUsarios {
 
     public static void limpiar (VentanaMain ventanaMain){
         ventanaMain.getFildUsarioCod().setText("");
-        ventanaMain.getFildUsarioCod().setEditable(true);
         ventanaMain.getFildUsarioNombre().setText("");
-        ventanaMain.getFildUsarioNombre().setEditable(true);
         ventanaMain.getDropUsarioTipo().setSelectedItem("Seleccionar");
         
     }
@@ -63,6 +61,7 @@ public class ControladorUsarios {
             JOptionPane.showMessageDialog(null, "Porfavor Ingrese el tipo de Usuario", "Advertencia", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+
         return true;
     
     }
@@ -84,7 +83,7 @@ public class ControladorUsarios {
         String stringIdUsuario = ventanaMain.getFildUsarioCod().getText();
         Integer idUsuario = Integer.valueOf(stringIdUsuario);
         String nombresUsario = ventanaMain.getFildUsarioNombre().getText();
-        String tipoUsuario = (String)ventanaMain.getDropUsarioTipo().getSelectedItem();
+        String tipoUsuario = ventanaMain.getDropUsarioTipo().getSelectedItem().toString();
         
 
         Usuarios usuario = new Usuarios(idUsuario, nombresUsario, tipoUsuario);

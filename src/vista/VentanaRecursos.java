@@ -100,12 +100,14 @@ public class VentanaRecursos extends JFrame {
         fildPrestamoIDRecurso.setFont(nuevaTipografia1);
         fildPrestamoIDRecurso.setForeground(colorletrasfont);
         fildPrestamoIDRecurso.setBackground(colorfondo2);
+        
 
         fildPrestamoRecurso = new JTextField();
         fildPrestamoRecurso.setBounds((int)243.5,(int)154.5,296,33);
         fildPrestamoRecurso.setFont(nuevaTipografia1);
         fildPrestamoRecurso.setForeground(colorletrasfont);
         fildPrestamoRecurso.setBackground(colorfondo2);
+        fildPrestamoRecurso.setEditable(false);
 
         fildPrestamoReg = new JTextField();
         fildPrestamoReg.setBounds((int)243.5,(int)197.5,296,33);

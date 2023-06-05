@@ -46,7 +46,7 @@ public class ControladorPrestamo {
         ventanaMain.getFildPresIdUs().setText("");
         ventanaMain.getFildPresNomUs().setText("");
         ventanaMain.getFildPresCantidad().setText("");
-        ventanaMain.getFildPresEstado().setText("");
+        ventanaMain.getDropEstado().setSelectedItem("Seleccionar");
     }
 
     public static String[] getTitlePrestamo(){
@@ -78,9 +78,9 @@ public class ControladorPrestamo {
             return false;
         }
 
-        String estado = ventanaMain.getFildPresEstado().getText();
-        if(estado.isEmpty() || estado.isBlank()){
-            JOptionPane.showMessageDialog(null, "Agregue un estado |Recuerde| Parcialmente abierto o cerrado " , "Advertencia", JOptionPane.ERROR_MESSAGE);
+        String estado = ventanaMain.getDropEstado().getSelectedItem().toString();
+        if(estado.equals("Seleccionar")){
+            JOptionPane.showMessageDialog(null, "Agregue un estado para el prestamo, \n |Recuerde| \n " , "Advertencia", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class ControladorPrestamo {
         String userNombrePr = ventanaMain.getFildPresNomUs().getText();
         String stCantidad = ventanaMain.getFildPresCantidad().getText();
         Integer cantidad = Integer.valueOf(stCantidad);
-        String estado = ventanaMain.getFildPresEstado().getText();
+        String estado = ventanaMain.getDropEstado().getSelectedItem().toString();
 
         Prestamo prestamo = new Prestamo(idPrestamo, idUserPrestamo, userNombrePr, listaRecursos, cantidad, estado);
         return prestamo;
@@ -112,7 +112,7 @@ public class ControladorPrestamo {
         ventanaMain.getFildPresIdUs().setText(tablausuarioIDPrestamo);
         ventanaMain.getFildPresNomUs().setText(tablausuarioPrestamo);
         ventanaMain.getFildPresCantidad().setText(tablacantidad);
-        ventanaMain.getFildPresEstado().setText(tablaestado);
+        ventanaMain.getDropEstado().setSelectedItem(tablaestado);
     }
 
         

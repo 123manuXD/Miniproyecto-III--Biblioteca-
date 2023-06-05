@@ -26,6 +26,7 @@ import javax.swing.table.*;
 
 public class ControladorListaRecursos {
     private static String listaRecursosEncabezado[] = {"Id recurso","recurso","Fecha de registro","Regresar Recurso","Recurso Regresado"};
+    private Integer numeroRecursos = 0;
 
     public static void limpiar(VentanaRecursos ventanaRecursos){
         ventanaRecursos.getFildPrestamoIDRecurso().setText("");

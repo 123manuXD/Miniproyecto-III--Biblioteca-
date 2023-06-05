@@ -44,19 +44,12 @@ public class Array implements Serializable{
         int numeroFilas = listaRecursos.size();
         int numeroColumnas = 6;
         String[][] arreglo = new String[numeroFilas][numeroColumnas];
-
-        Date fechaR = new Date();
-        Date fechaPdv = new Date();
-        Date fechaDv = new Date();
         int contadorFila = 0;
         for(Map.Entry<Integer, Integer> pareja : listaRecursos.entrySet()){
             Integer iDrecurso = pareja.getKey();
             arreglo[contadorFila][0] = String.valueOf(iDrecurso);
             arreglo[contadorFila][1] = String.valueOf(biblioteca.getRecurso().getElemento(iDrecurso).getTitulo());
-            arreglo[contadorFila][2] = String.valueOf(fechaR);
-            arreglo[contadorFila][3] = String.valueOf(fechaPdv);
-            arreglo[contadorFila][4] = String.valueOf(fechaDv);
-            
+            arreglo[contadorFila][2] = String.valueOf(pareja.getValue());
             contadorFila++;
         }
         return arreglo;

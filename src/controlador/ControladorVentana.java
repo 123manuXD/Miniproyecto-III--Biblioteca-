@@ -76,7 +76,7 @@ public class ControladorVentana {
         this.ventanaMain.addFocusListener(new setfocus());
         ventanaRecursos.addListener(new AddListener());
         ventanaRecursos.addFocusListener(new setfocus());
-        pintartabla(apartadoFormulario);
+        
         
     }
 
@@ -174,7 +174,7 @@ public class ControladorVentana {
                 ControladorRecurso.pintar(ventanaMain, serialRecurso);
                 apartadoFormulario = "recursoform";
                 pintartabla(apartadoFormulario);
-            } else if (e.getActionCommand().equals("Listar Productos")){
+            } else if (e.getActionCommand().equals("Listar Recursos")){
                 pintarListadoo();
                 pintartabla(apartadoFormulario);
             } else if (e.getActionCommand().equals("Pre")){

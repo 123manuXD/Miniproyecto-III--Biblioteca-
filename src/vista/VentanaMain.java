@@ -22,8 +22,6 @@ import javax.swing.tree.FixedHeightLayoutCache;
 
 public class VentanaMain extends JFrame implements ActionListener{
 
-    private String[] opcionesApartado = {"Selecione el Apartado","Usuarios", "Recursos", "Autores", "Genero|literario", "Prestamo"};
-    private JComboBox<String> dropApartado = new JComboBox<>(opcionesApartado);
     Integer apartadoForm = 0;
     private JTable DatosEnTabla = new JTable();
     private JScrollPane Paneltable = new JScrollPane();
@@ -47,7 +45,7 @@ public class VentanaMain extends JFrame implements ActionListener{
     private JLabel lblcodRecurso, lbltituloRecurso, lblRecDate, lblRectipo, lblRecAutor, lblRecGenlt, lblRecAutordato, lblRecGenDato;
     private JTextField fildRecursoCod, fildRecursoTitle, fildRecursoDate, fildRecusoAutor, fildRecursoGnlt, fildRecUV, fildRecGV;
    
-    private String[] tipoRecurso = {"Seleccionar","Libro","Revista","Articulo","Comic","Manga"};
+    private String[] tipoRecurso = {"Seleccionar","Libro","Revista","Articulo","Comic","Manga","Pelicula","Grabacion Historica"};
     private JComboBox<String> dropRecursoTipo = new JComboBox<>(tipoRecurso);
 
     //  ------------ PARA EL AUTOR ------------------ 
@@ -65,7 +63,10 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     private String[] estadoPrestamo = {"Seleccionar","Abierto","Parialemente Cerrado","Cerrado"};
     private JComboBox<String> dropEstado = new JComboBox<>(estadoPrestamo);
-    
+
+    //Encabezado panel tablas
+    private JPanel panelReplaceTabla;
+    private JLabel titleUsuario, titleRecursos, titlePrestamo, titleGenero, titleAutor;
     
     public VentanaMain (){
         iniciarComponentes();
@@ -92,6 +93,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         Font nuevaTipografia = new Font("Courier New", Font.BOLD, 20);
         Font nuevaTipografia2 = new Font("Courier New", Font.BOLD, 55);
         Font nuevaTipografia3 = new Font("Courier New", Font.BOLD, 47);
+        Font nuevaTipografia4 = new Font("Courier New", Font.BOLD, 40);
         Color colorletras = new Color(74,39,23);
         //Color de fondo
         Color colorfondo = new Color(232, 246, 239);
@@ -156,18 +158,41 @@ public class VentanaMain extends JFrame implements ActionListener{
         jpPrincipal.add(jpLista);
 
 
-        dropApartado.setBounds((int)185.38, (int)68.34 , (int)338.82, (int)22.52);
-        dropApartado.setOpaque(true);
-        dropApartado.setFont(nuevaTipografia);
-        dropApartado.setForeground(colorletras);
-        dropApartado.setBackground(colorfondo);
-        jpLista.add(dropApartado); 
-
         jpconTablas = new JPanel();
-        //jpconTablas.setLayout(null);
         jpconTablas.setBounds(18,121, 512,347);
         jpconTablas.setBackground(colorfondo);
         jpLista.add(jpconTablas);
+
+        panelReplaceTabla = new JPanel();
+        panelReplaceTabla.setBounds((int)29.5 ,(int)55.5,494,39);
+        panelReplaceTabla.setBackground(colorfondo);
+        jpLista.add(panelReplaceTabla);
+
+        titleAutor = new JLabel("Lista Autores");
+        titleAutor.setBounds((int)65.5,(int)41.5, 429,39);
+        titleAutor.setFont(nuevaTipografia4);
+        titleAutor.setForeground(colorletras);
+
+        titleRecursos = new JLabel("Lista Recursos");
+        titleRecursos.setBounds((int)65.5,(int)41.5, 429,39);
+        titleRecursos.setFont(nuevaTipografia4);
+        titleRecursos.setForeground(colorletras);
+
+        titleGenero = new JLabel("Lista Genero Literario");
+        titleGenero.setBounds((int)65.5,(int)41.5, 429,39);
+        titleGenero.setFont(new Font("Courier New", Font.BOLD, 35));
+        titleGenero.setForeground(colorletras);
+
+        titlePrestamo = new JLabel("Lista Prestamos");
+        titlePrestamo.setBounds((int)65.5,(int)41.5, 429,39);
+        titlePrestamo.setFont(nuevaTipografia4);
+        titlePrestamo.setForeground(colorletras);
+
+        titleUsuario = new JLabel("Lista Usuarios");
+        titleUsuario.setBounds((int)65.5,(int)41.5, 429,39);
+        titleUsuario.setFont(nuevaTipografia4);
+        titleUsuario.setForeground(colorletras);
+        
 
         imlist = new Decolib("/img/panelLista.png");
         imlist.setBounds(0,0, 552, 494);
@@ -547,7 +572,7 @@ public class VentanaMain extends JFrame implements ActionListener{
         fildPresNomUs.setBackground(colorfondo);
         fildPresNomUs.setEditable(false);
         
-        recursosver = new JButton("Listar Productos");
+        recursosver = new JButton("Listar Recursos");
         recursosver.setBounds((int)225.5, (int)136.5,265,30);
         recursosver.setOpaque(true);
         recursosver.setBackground(colorfondo);
@@ -590,10 +615,6 @@ public class VentanaMain extends JFrame implements ActionListener{
         im2.setBounds(0,0, 1196, 636);
         jpPrincipal.add(im2);
         
-        /* btnagregar.addActionListener(this);
-        btneliminar.addActionListener(this);
-        btneditar.addActionListener(this);
-        btnlimpiar.addActionListener(this); */
     }
      
     @Override
@@ -603,18 +624,23 @@ public class VentanaMain extends JFrame implements ActionListener{
         if(event.getSource() == btnusario){
             System.out.println("Botn de usario");
             mostralpanel(jpuser);
+            mostrallbl(titleUsuario);
         }else if (event.getSource() == btnautor){
             System.out.println("Botn de autor");
             mostralpanel(jpautor);
+            mostrallbl(titleAutor);
         }else if (event.getSource() == btnrecurso){
             System.out.println("Botn de recurso");
             mostralpanel(jprecur);
+            mostrallbl(titleRecursos);
         }else if (event.getSource() == btngnrliterario){
             System.out.println("Botn de genero literario");
             mostralpanel(jpgnrlite);
+            mostrallbl(titleGenero);
         } else if (event.getSource() == btnprestamo){
             System.out.println("boton de Prestamo");
             mostralpanel(jpPrestamo);
+            mostrallbl(titlePrestamo);
         }
     
     
@@ -622,7 +648,6 @@ public class VentanaMain extends JFrame implements ActionListener{
     }
 
     public void addListener(ActionListener listenControles){
-        dropApartado.addActionListener(listenControles);
         btnagregar.addActionListener(listenControles);
         btneliminar.addActionListener(listenControles);
         btneditar.addActionListener(listenControles);
@@ -647,6 +672,13 @@ public class VentanaMain extends JFrame implements ActionListener{
         jprplace.add(show);
         jprplace.revalidate();
         jprplace.repaint();
+    }
+
+    private void mostrallbl (JLabel showlbl){
+        panelReplaceTabla.removeAll();
+        panelReplaceTabla.add(showlbl);
+        panelReplaceTabla.revalidate();
+        panelReplaceTabla.repaint();
     }
     /*------------ Para Recursos (Getters) -------------------*/
     public JTextField getFildRecursoCod() {
@@ -786,10 +818,6 @@ public class VentanaMain extends JFrame implements ActionListener{
 
     public JPanel getPanelTablas(){
         return jpconTablas;
-    }
-
-    public JComboBox<String> getApartado() {
-        return dropApartado;
     }
 
 }

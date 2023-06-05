@@ -9,8 +9,8 @@ Entregables:
 - Mockups de interfaces gráficas
 - Diagrama de Clases
 - URL del repositorio con el código de la aplicación
+- Codigo Aplicacion
 - Video con MVP y evidencia de ejecución de la aplicación
-- Product Backlog en Jira - Evidencias
 
 ## Necesidad de usario
 El servicio de biblioteca de Univalle requiere un software que le permita gestionar y controlar 

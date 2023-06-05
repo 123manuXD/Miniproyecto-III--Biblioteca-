@@ -152,7 +152,7 @@ public class VentanaRecursos extends JFrame {
         add(jpanelcontenTable);
 
         jpanelTabla.setBounds(10,63,519,352);
-        jpanelTabla.setBackground(new Color(102,46,14));
+        jpanelTabla.setBackground(colorfondo2);
         jpanelcontenTable.add(jpanelTabla);
 
         im3 = new Decolib("/img/vista2/panel2.png");

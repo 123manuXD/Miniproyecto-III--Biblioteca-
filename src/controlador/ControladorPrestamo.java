@@ -87,7 +87,7 @@ public class ControladorPrestamo {
         
     }
 
-    public static Prestamo crearPrestamo(VentanaMain ventanaMain, HashMap<Integer, Integer> listaRecursos){
+    public static Prestamo crearPrestamo(VentanaMain ventanaMain, HashMap<Integer, String[]> listaRecursos){
         String stIdPrestamo = ventanaMain.getFildPresCod().getText();
         Integer idPrestamo = Integer.valueOf(stIdPrestamo);
         String stIdUserPres = ventanaMain.getFildPresIdUs().getText();

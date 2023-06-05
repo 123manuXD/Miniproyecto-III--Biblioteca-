@@ -37,7 +37,7 @@ public class Array implements Serializable{
         return arreglo;
     }
 
-    public static String[][] getArrayRecursos(Biblioteca biblioteca, HashMap<Integer, Integer> listaRecursos ){
+    public static String[][] getArrayRecursos(Biblioteca biblioteca, HashMap<Integer, String[]> listaRecursos ){
         if(listaRecursos.isEmpty())
             return null;
         
@@ -45,11 +45,13 @@ public class Array implements Serializable{
         int numeroColumnas = 6;
         String[][] arreglo = new String[numeroFilas][numeroColumnas];
         int contadorFila = 0;
-        for(Map.Entry<Integer, Integer> pareja : listaRecursos.entrySet()){
+        for(Map.Entry<Integer, String[]> pareja : listaRecursos.entrySet()){
             Integer iDrecurso = pareja.getKey();
             arreglo[contadorFila][0] = String.valueOf(iDrecurso);
             arreglo[contadorFila][1] = String.valueOf(biblioteca.getRecurso().getElemento(iDrecurso).getTitulo());
-            arreglo[contadorFila][2] = String.valueOf(pareja.getValue());
+            arreglo[contadorFila][2] = pareja.getValue()[0];
+            arreglo[contadorFila][3] = pareja.getValue()[1];
+            arreglo[contadorFila][4] = pareja.getValue()[2];
             contadorFila++;
         }
         return arreglo;

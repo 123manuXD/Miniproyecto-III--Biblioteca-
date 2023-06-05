@@ -22,16 +22,15 @@ public class Prestamo implements Listable, Serializable{
     private Integer codigo;
     private Integer codigoUsuario;
     private String nombreUsuario;
-    private HashMap<Integer, Integer> listaRecursos;
+    private HashMap<Integer, String[]> listaRecursos ;
     private Integer numeroRecursos = 0;
     private String estado;
 
-    public Prestamo (Integer codigo, Integer codigoUsuario, String nombreUsuario, HashMap<Integer, Integer> listaRecursos, Integer numeroRecursos, String estado ){
+    public Prestamo (Integer codigo, Integer codigoUsuario, String nombreUsuario, HashMap<Integer, String[]> listaRecursos, Integer numeroRecursos, String estado ){
         this.codigo = codigo;
         this.codigoUsuario = codigoUsuario;
         this.nombreUsuario = nombreUsuario;
         this.listaRecursos = listaRecursos;
-        calcularRecursos();
         this.numeroRecursos = numeroRecursos;
         this.estado = estado;
     }
@@ -48,13 +47,8 @@ public class Prestamo implements Listable, Serializable{
         return nombreUsuario;
     }
 
-    public HashMap<Integer, Integer> getListaRecursos() {
+    public HashMap<Integer, String[]> getListaRecursos() {
         return listaRecursos;
-    }
-
-    public void calcularRecursos(){
-        for(Map.Entry<Integer, Integer> pareja : listaRecursos.entrySet())
-            numeroRecursos += pareja.getValue();
     }
 
     public Integer getNumeroRecursos() {
@@ -84,6 +78,13 @@ public class Prestamo implements Listable, Serializable{
             default:
                 return "";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Prestamo [codigo=" + codigo + ", codigoUsuario=" + codigoUsuario + ", nombreUsuario=" + nombreUsuario
+                + ", listaRecursos=" + listaRecursos + ", numeroRecursos=" + numeroRecursos + ", estado=" + estado
+                + "]";
     }
     
 }
